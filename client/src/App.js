@@ -1,21 +1,52 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React, { useState } from "react";
+import {
+  BrowserRouter as Router,
+  Link,
+  Route
+} from "react-router-dom";
+import UserContext from "./utils/UserContext";
+import PrivateRoute from './PrivateRoute'
+import Home from './pages/Home';
+import Admin from './pages/Admin';
+import Login from "./pages/Login";
+import { AuthContext } from "./utils/AuthContext";
+import Signup from "./pages/Signup";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+const App = props => {
+
+
+  const [activeUser, setActiveUser] = useState(
+    {
+      _id: "",
+      username: "",
+      gm: false,
+      characters: []
+    }
+  );
+  
+  return(
+    <AuthContext.Provider value={false}>
+    <UserContext.Provider value={activeUser}>
+      <Router>
+        <div>
+          <ul>
+            <li>
+              <Link to="/">Home Page</Link>
+            </li>
+            <li>
+              <Link to="/admin">Admin Page</Link>
+            </li>
+          </ul>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
+        <PrivateRoute exact path="/" component={Home} />
+        <PrivateRoute path="/admin" component={Admin} />
+      </Router>
+    </UserContext.Provider>
+    </AuthContext.Provider>
+  )
+
 }
 
 export default App;

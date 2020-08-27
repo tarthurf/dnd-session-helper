@@ -3,10 +3,13 @@ const controller = require('../../controllers');
 
 // Matches with "/api/users"
 router.route("/")
-    .post(controller.User.create);
+  .post(controller.User.create);
 
 // Matches with "/api/users/all"
 router.route("/all")
-    .get(controller.User.findAll);
+  .get(controller.User.findAll);
+    
+router.route("/username/:username")
+  .get(controller.User.findByName);
 
 module.exports = router;
