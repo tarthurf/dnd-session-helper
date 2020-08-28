@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 // import UserContext from '../utils/UserContext';
 import useForm from '../utils/useForm';
-// import API from '../utils/API';
+import API from '../utils/API';
+import { AuthContext } from '../utils/AuthContext';
 
 const Login = () => {
+
+  const { verified } = useContext(AuthContext);
+
+  const userLogin = () => {
+    API.getUserByName(username)
+    .then(res => {
+      console.log(res.data[0].username);
+      if (res.data[0].username === username) {
+      }
+      console.log(verified)
+    })
+    .catch(error => console.log(error))
+  }
 
   const { values, handleChange, handleSubmit } = useForm(
     {
@@ -14,12 +28,11 @@ const Login = () => {
     userLogin
   );
 
-  const userLogin = () => {
-    console.log('yay!')
-  }
+  const username = values.username;
 
   return(
     <div>
+    {console.log(verified)}
       <h1>Login</h1>
       <form
         onSubmit={handleSubmit}

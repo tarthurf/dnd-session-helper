@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import useForm from '../utils/useForm';
 import API from '../utils/API';
 
@@ -29,11 +29,11 @@ const Signup = () => {
         onSubmit={handleSubmit}
       >
         <label>
-          Enter Username
+          Enter a username (not case sensitive)
         </label>
         <textarea
           name="username"
-          placeholder="Not case sensitive"
+          placeholder="Username"
           onChange={handleChange}
           value={values.username}
           required
@@ -52,7 +52,7 @@ const Signup = () => {
         </select>
         <input
           type="submit"
-          value="New User"
+          value="Create User"
         />
       </form>
       <Link to="/login">Login</Link>

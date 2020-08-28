@@ -9,7 +9,7 @@ router.route("/")
 router.route("/all")
   .get(controller.User.findAll);
     
-router.route("/username/:username")
+router.route("/:username")
   .get(controller.User.findByName);
 
 module.exports = router;

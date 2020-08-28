@@ -14,6 +14,7 @@ import Signup from "./pages/Signup";
 
 const App = props => {
 
+  const [ verified, setVerifiedState ] = useState({verified: false})
 
   const [activeUser, setActiveUser] = useState(
     {
@@ -25,7 +26,7 @@ const App = props => {
   );
   
   return(
-    <AuthContext.Provider value={false}>
+    <AuthContext.Provider value={verified}>
     <UserContext.Provider value={activeUser}>
       <Router>
         <div>
