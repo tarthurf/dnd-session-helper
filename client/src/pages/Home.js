@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import UserContext from '../utils/UserContext';
 
 const Home = props => {
+
+  const { _id, username, characters, gm } = useContext(UserContext);
+
   return(
     <div>
-      Home Page
+      Hello!
+      id: {_id}
+      username: {username}
+      gm: {gm}
     </div>
   )
 }

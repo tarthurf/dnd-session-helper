@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Link,
-  Route
+  Route,
+  useHistory
 } from "react-router-dom";
 import UserContext from "./utils/UserContext";
 import PrivateRoute from './PrivateRoute'
@@ -11,41 +12,72 @@ import Admin from './pages/Admin';
 import Login from "./pages/Login";
 import { AuthContext } from "./utils/AuthContext";
 import Signup from "./pages/Signup";
+import useForm from './utils/useForm';
+import API from './utils/API';
 
 const App = props => {
 
-  const [ verified, setVerifiedState ] = useState({verified: false})
+  const [ verified, setVerifiedState ] = useState(false)
 
-  const [activeUser, setActiveUser] = useState(
-    {
-      _id: "",
-      username: "",
+  const [ activeUser, setActiveUser ] = useState(
+    { 
       gm: false,
-      characters: []
+      characters: [],
+      _id: "",
+      username: ""
     }
   );
-  
+
+  const userLogin = () => {
+    API.getUserByName(values.username)
+    .then(res => {
+      console.log(res.data[0]);
+      if (res.data[0].username) setActiveUser(res.data[0]);
+    }).then(() => {
+      if (activeUser.username !== "")
+      setVerifiedState(true);
+    })
+    .catch(error => console.log(error))
+  }
+
+  const { values, handleChange, handleSubmit } = useForm(
+    {username: ""},
+    userLogin
+  );
+
+  // useEffect(() => {
+  //   userLogin();
+  // },[activeUser])
+
   return(
-    <AuthContext.Provider value={verified}>
-    <UserContext.Provider value={activeUser}>
-      <Router>
-        <div>
-          <ul>
-            <li>
-              <Link to="/">Home Page</Link>
-            </li>
-            <li>
-              <Link to="/admin">Admin Page</Link>
-            </li>
-          </ul>
-        </div>
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />
-        <PrivateRoute exact path="/" component={Home} />
-        <PrivateRoute path="/admin" component={Admin} />
-      </Router>
-    </UserContext.Provider>
-    </AuthContext.Provider>
+      <UserContext.Provider value={{ activeUser, setActiveUser }}>
+        {verified === false ?
+          <div>
+            <h1>Login</h1>
+            <form
+              onSubmit={handleSubmit}
+            >
+              <label>
+                Enter Username
+              </label>
+              <textarea
+                name="username"
+                placeholder="Not case sensitive"
+                onChange={handleChange}
+                value={values.username}
+                required
+              >
+              </textarea>
+              <input
+                type="submit"
+                value="Login"
+              />
+            </form>
+          </div>
+          :
+          <Home />
+        }
+      </UserContext.Provider>
   )
 
 }
