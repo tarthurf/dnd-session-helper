@@ -4,8 +4,12 @@ const path = require("path");
 const PORT = process.env.PORT || 3001;
 
 const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io') (server);
+module.exports = io;
 const routes = require('./routes/index.js')
 require('./database');
+require('./socket');
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -24,6 +28,6 @@ if (process.env.NODE_ENV === "production") {
 // API and view routes
 app.use(routes);
 
-app.listen(PORT, function() {
+server.listen(PORT, function() {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
 });

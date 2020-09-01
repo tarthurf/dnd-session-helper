@@ -8,4 +8,7 @@ router.route("/")
 router.route("/all")
   .get(controller.Character.findAll);
 
+router.route("/:name")
+.get(controller.Character.findByName);
+
 module.exports = router;

@@ -1,83 +1,92 @@
 import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  useHistory
-} from "react-router-dom";
-import UserContext from "./utils/UserContext";
-import PrivateRoute from './PrivateRoute'
-import Home from './pages/Home';
-import Admin from './pages/Admin';
-import Login from "./pages/Login";
-import { AuthContext } from "./utils/AuthContext";
-import Signup from "./pages/Signup";
-import useForm from './utils/useForm';
+// import UserContext from "./utils/UserContext";
+import io from 'socket.io-client';
+// import useForm from './utils/useForm';
 import API from './utils/API';
+import CharacterCard from "./components/CharacterCard";
+// import CreateCharacter from "./components/CreateCharacter";
+// import CharacterSelect from "./components/CharacterSelect";
 
-const App = props => {
+const socket = io();
 
-  const [ verified, setVerifiedState ] = useState(false)
+const App = () => {
 
-  const [ activeUser, setActiveUser ] = useState(
-    { 
-      gm: false,
-      characters: [],
-      _id: "",
-      username: ""
+  // Sets character Array for users to select from
+  const [characters, setCharacters] = useState([]);
+
+  // Handles character selection for user
+  const [characterSelect, setCharacterSelect] = useState("");
+  // Handles Character selection value change
+  const handleCharacterSelection = e => {
+    setCharacterSelect(e.target.value)
+  };
+  // Takes character select state and grabs the character info from an api
+  const selectCharacter = e => {
+    e.preventDefault();
+    API.getCharacterByName(characterSelect)
+      .then(char => {
+        const character = char.data[0];
+        setUserCharacter(character)
+      })
+      .catch(err => console.log(err))
+  }
+
+  // State for users selected character
+  const [userCharacter, setUserCharacter] = useState(
+    {
+      name: "",
+      race: "",
+      subrace: "",
+      class: "",
+      level: "",
+      maxHP: "",
+      AC: "",
+      initiative: "",
+      perception: "",
     }
   );
 
-  const userLogin = () => {
-    API.getUserByName(values.username)
-    .then(res => {
-      console.log(res.data[0]);
-      if (res.data[0].username) setActiveUser(res.data[0]);
-    }).then(() => {
-      if (activeUser.username !== "")
-      setVerifiedState(true);
-    })
-    .catch(error => console.log(error))
-  }
+  // Gets all created characters on page load
+  useEffect(() => {
+    API.getAllCharacters()
+      .then(characters => {
+        console.log(characters.data);
+        const charactersArr = characters.data;
+        setCharacters(charactersArr)
+      })
+  }, [])
 
-  const { values, handleChange, handleSubmit } = useForm(
-    {username: ""},
-    userLogin
-  );
-
-  // useEffect(() => {
-  //   userLogin();
-  // },[activeUser])
-
-  return(
-      <UserContext.Provider value={{ activeUser, setActiveUser }}>
-        {verified === false ?
-          <div>
-            <h1>Login</h1>
-            <form
-              onSubmit={handleSubmit}
-            >
-              <label>
-                Enter Username
-              </label>
-              <textarea
-                name="username"
-                placeholder="Not case sensitive"
-                onChange={handleChange}
-                value={values.username}
-                required
+  return (
+    <div>
+      {console.log('user character', userCharacter)}
+      {userCharacter.name === "" ?
+        <form onSubmit={selectCharacter}>
+          <label>
+            Select Character
+        </label>
+          <select
+            value={characterSelect}
+            onChange={handleCharacterSelection}
+            id="name"
+            size="6"
+          >
+            {characters.map(char => (
+              <option
+                key={char._id}
+                value={char.name}
               >
-              </textarea>
-              <input
-                type="submit"
-                value="Login"
-              />
-            </form>
-          </div>
-          :
-          <Home />
-        }
-      </UserContext.Provider>
+                {char.name}
+              </option>
+            ))}
+          </select>
+          <button type="submit">Confirm</button>
+        </form>
+        :
+        <div>
+              <CharacterCard character={userCharacter} />
+        </div>
+      }
+    </div>
   )
 
 }
