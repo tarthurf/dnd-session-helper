@@ -2,11 +2,15 @@ import React from 'react';
 import useForm from '../utils/useForm';
 import API from '../utils/API';
 
-const CreateCharacter = () => {
+const CreateCharacter = props => {
+
+  let state = props.state;
+  const setState = props.setState;
 
   const characterSubmit = () => {
     console.log(values)
     API.createCharacter(values)
+    setState(!state)
   }
 
   const { values, handleSubmit, handleChange } = useForm(
@@ -136,6 +140,7 @@ const CreateCharacter = () => {
         />
         <button type="submit">Create character</button>
     </form>
+    <button onClick={()=> setState(!state)}>Choose a Character</button>
     </React.Fragment>
   )
 

@@ -4,12 +4,15 @@ import io from 'socket.io-client';
 // import useForm from './utils/useForm';
 import API from './utils/API';
 import CharacterCard from "./components/CharacterCard";
+import CreateCharacter from "./components/CreateCharacter";
 // import CreateCharacter from "./components/CreateCharacter";
 // import CharacterSelect from "./components/CharacterSelect";
 
 const socket = io();
 
 const App = () => {
+
+  const [ createCharacterState, setCreateCharacterState ] = useState(false)
 
   // Sets character Array for users to select from
   const [characters, setCharacters] = useState([]);
@@ -24,11 +27,12 @@ const App = () => {
   const selectCharacter = e => {
     e.preventDefault();
     API.getCharacterByName(characterSelect)
-      .then(char => {
-        const character = char.data[0];
-        setUserCharacter(character)
-      })
-      .catch(err => console.log(err))
+    .then(char => {
+      const character = char.data[0];
+      setUserCharacter(character);
+      socket.emit('add-user-character', character);
+    })
+    .catch(err => console.log(err))
   }
 
   // State for users selected character
@@ -58,29 +62,37 @@ const App = () => {
 
   return (
     <div>
-      {console.log('user character', userCharacter)}
-      {userCharacter.name === "" ?
-        <form onSubmit={selectCharacter}>
-          <label>
-            Select Character
-        </label>
-          <select
-            value={characterSelect}
-            onChange={handleCharacterSelection}
-            id="name"
-            size="6"
-          >
-            {characters.map(char => (
-              <option
-                key={char._id}
-                value={char.name}
+    {userCharacter.name === "" ?
+      createCharacterState === false ? 
+        <React.Fragment>
+          <form onSubmit={selectCharacter}>
+            <label>
+              Select Character
+            </label>
+              <select
+                value={characterSelect}
+                onChange={handleCharacterSelection}
+                id="name"
+                size="6"
               >
-                {char.name}
-              </option>
-            ))}
-          </select>
-          <button type="submit">Confirm</button>
-        </form>
+                {characters.map(char => (
+                  <option
+                    key={char._id}
+                    value={char.name}
+                  >
+                    {char.name}
+                  </option>
+                ))}
+              </select>
+              <button type="submit">Confirm</button>
+            </form>
+            <button onClick={() => setCreateCharacterState(!createCharacterState)}>Create a Character</button>
+          </React.Fragment>
+          :
+          <CreateCharacter 
+            state={createCharacterState}
+            setState={setCreateCharacterState}
+          />
         :
         <div>
               <CharacterCard character={userCharacter} />
