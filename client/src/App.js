@@ -1,83 +1,31 @@
 import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  useHistory
-} from "react-router-dom";
 import UserContext from "./utils/UserContext";
-import PrivateRoute from './PrivateRoute'
-import Home from './pages/Home';
-import Admin from './pages/Admin';
-import Login from "./pages/Login";
-import { AuthContext } from "./utils/AuthContext";
-import Signup from "./pages/Signup";
+import io from 'socket.io-client';
 import useForm from './utils/useForm';
 import API from './utils/API';
+import CreateCharacter from "./components/CreateCharacter";
+
+const socket = io();
 
 const App = props => {
-
-  const [ verified, setVerifiedState ] = useState(false)
-
-  const [ activeUser, setActiveUser ] = useState(
-    { 
-      gm: false,
-      characters: [],
-      _id: "",
-      username: ""
-    }
-  );
-
-  const userLogin = () => {
-    API.getUserByName(values.username)
-    .then(res => {
-      console.log(res.data[0]);
-      if (res.data[0].username) setActiveUser(res.data[0]);
-    }).then(() => {
-      if (activeUser.username !== "")
-      setVerifiedState(true);
+  
+  const [ characters, setCharacters ] = useState([]);
+  
+  useEffect(() => {
+    API.getAllCharacters()
+    .then(characters => {
+      console.log(characters.data);
+      const charactersArr = characters.data;
+      setCharacters(charactersArr)
     })
-    .catch(error => console.log(error))
-  }
-
-  const { values, handleChange, handleSubmit } = useForm(
-    {username: ""},
-    userLogin
-  );
-
-  // useEffect(() => {
-  //   userLogin();
-  // },[activeUser])
+  },[])
 
   return(
-      <UserContext.Provider value={{ activeUser, setActiveUser }}>
-        {verified === false ?
-          <div>
-            <h1>Login</h1>
-            <form
-              onSubmit={handleSubmit}
-            >
-              <label>
-                Enter Username
-              </label>
-              <textarea
-                name="username"
-                placeholder="Not case sensitive"
-                onChange={handleChange}
-                value={values.username}
-                required
-              >
-              </textarea>
-              <input
-                type="submit"
-                value="Login"
-              />
-            </form>
-          </div>
-          :
-          <Home />
-        }
-      </UserContext.Provider>
+    <div>
+      {console.log('characters', characters)}
+      Select Character
+      <CreateCharacter/>
+    </div>
   )
 
 }

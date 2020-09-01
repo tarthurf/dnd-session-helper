@@ -3,9 +3,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const CharacterSchema = new Schema({
-  owner: {
-    type: String,
-  },
   name: {
     type: String,
     trim: true,
