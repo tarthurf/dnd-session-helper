@@ -38,5 +38,8 @@ export default {
   getCharacterByName: (name) => {
     return axios.get(`/api/character/${name}`);
   },
-
+  
+  deleteCharacterByName: (name) => {
+    return axios.get(`/api/character/delete/${name}`);
+  },
 }

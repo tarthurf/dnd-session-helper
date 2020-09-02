@@ -1,4 +1,5 @@
 const db = require('../models/index.js');
+const { findByIdAndDelete } = require('../models/userModel.js');
 
 module.exports = {
   findAll: (req, res) => {
@@ -16,5 +17,12 @@ module.exports = {
     db.Character.create(req.body)
     .then(dbModel => res.json(dbModel))
     .catch(err => res.status(422).json(err));
-  }
+  },
+
+  delete: (req, res) => {
+    db.Character.find({"name": req.params.name})
+    .then(dbModel => findByIdAndDelete(dbModel._id))
+    .then(dbModel => res.json(dbModel))
+    .catch(err => res.status(422).json(err));
+  },
 }

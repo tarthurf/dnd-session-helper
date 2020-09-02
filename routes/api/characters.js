@@ -11,4 +11,7 @@ router.route("/all")
 router.route("/:name")
 .get(controller.Character.findByName);
 
+router.route("/delete/:name")
+.get(controller.Character.delete);
+
 module.exports = router;
