@@ -1,6 +1,5 @@
 const io = require('./server.js');
-
-let characterArr = []
+const { disconnect } = require('mongoose');
 
 let userCharacters= []
 
@@ -11,6 +10,7 @@ io.on('connection', socket => {
   // Handles user character selection
   socket.on('add-user-character', data => {
     const character = data;
+    socket.character = character.name;
     userCharacters.push(character);
     // Pushes updated array to client
     io.emit('update-user-characters', userCharacters);
@@ -25,5 +25,20 @@ io.on('connection', socket => {
     })
     socket.broadcast.emit('update-user-characters', userCharacters)
   })
-  
+
+  // Handle user disconnect
+  // If user intentionally disconnects, their character is 
+  //    removed from array and userCharacters updates on the client
+  socket.on('disconnect', reason => {
+    if (reason === 'io server disconnect') socket.connect();
+    else {
+      userCharacters.map((char, i) => {
+        if (char.name === socket.character) {
+          userCharacters.splice(i, 1);
+          io.emit('update-user-characters', userCharacters);
+        }
+      })
+    }
+  })
+
 })
