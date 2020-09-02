@@ -9,6 +9,7 @@ const CreateCharacter = props => {
 
   const characterSubmit = () => {
     console.log(values)
+    values.currentHP = values.maxHP;
     API.createCharacter(values)
     setState(!state)
   }
@@ -21,6 +22,7 @@ const CreateCharacter = props => {
       class: "",
       level: "",
       maxHP: "",
+      currentHP: "",
       AC: "",
       initiative: "",
       perception: "",
