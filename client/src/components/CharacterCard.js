@@ -5,12 +5,26 @@ const CharacterCard = props => {
   const character = props.character;
 
   return(
-    <div>
-      <h1>Name: {character.name}</h1>
-      <span><h2>Race: {character.race}</h2><h2>Subrace: {character.subrace}</h2></span>
-      <span><h2>Class: {character.class}</h2><h2>Level: {character.level}</h2></span>
-      <span><h2>Current HP: {character.currentHP}</h2><h2>Max HP: {character.maxHP}</h2></span>
-      <span><h2>AC: {character.AC}</h2><h2>Initiative: {character.initiative}</h2><h2>Perception: {character.perception}</h2></span>
+    <div className='flex flex-col justufy-center w-3/4 border border-black text-xl'>
+      <div className='flex justify-around items-center'>
+        <h1 className='text-2xl'>{character.name}</h1>
+        {character.subrace === "" ?
+        <p>{character.race}</p>
+        :
+        <p>{character.subrace}</p>
+        }
+        <p>{character.class} {character.level}</p>
+      </div>
+      <div className='flex justify-center'>
+        <p>HP: </p>
+        <p>{character.currentHP}</p>
+        <p>/ {character.maxHP}</p>
+      </div>
+      <div className='flex justify-around'>
+        <p>AC: {character.AC}</p>
+        <p>Initiative: {character.initiative}</p>
+        <p>Perception: {character.perception}</p>
+      </div>
     </div>
   )
 }

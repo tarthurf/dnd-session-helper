@@ -25,6 +25,12 @@ const CharacterSchema = new Schema({
   level: {
     type: Number,
   },
+  alignment: {
+    type: String,
+  },
+  speed: {
+    type: Number,
+  },
   currentHP: {
     type: Number,
   },
@@ -34,12 +40,457 @@ const CharacterSchema = new Schema({
   AC: {
     type: Number,
   },
+  proficiency: {
+    type: Number,
+  },
   initiative: {
     type: Number,
   },
   perception: {
     type: Number,
-  }
+  },
+  background: {
+    type: String,
+  },
+  abilityScores: {
+    str: {
+      type: Number,
+    },
+    dex: {
+      type: Number,
+    },
+    con: {
+      type: Number,
+    },
+    int: {
+      type: Number,
+    },
+    wis: {
+      type: Number,
+    },
+    cha: {
+      type: Number,
+    },
+  },
+  proficiencies: [
+  ],
+  traits: [
+  ],
+  abilities: [
+  ],
+  languages: [
+  ],
+  skills: {
+    acrobatics: {
+      ability: {
+        type: String,
+        default: "dex",
+      },
+      rank:{
+        type: Number,
+        default: 0,
+      },
+      bonus:{
+        type: Number,
+        default: 0,
+      },
+      trained: {
+        type: Boolean,
+        default: false
+      }
+    },
+    animalHandling: {
+      ability: {
+        type: String,
+        default: "wis",
+      },
+      rank:{
+        type: Number,
+        default: 0,
+      },
+      bonus:{
+        type: Number,
+        default: 0,
+      },
+      trained: {
+        type: Boolean,
+        default: false
+      }
+    },
+    arcana: {
+      ability: {
+        type: String,
+        default: "int",
+      },
+      rank:{
+        type: Number,
+        default: 0,
+      },
+      bonus:{
+        type: Number,
+        default: 0,
+      },
+      trained: {
+        type: Boolean,
+        default: false
+      }
+    },
+    athletics: {
+      ability: {
+        type: String,
+        default: "str",
+      },
+      rank:{
+        type: Number,
+        default: 0,
+      },
+      bonus:{
+        type: Number,
+        default: 0,
+      },
+      trained: {
+        type: Boolean,
+        default: false
+      }
+    },
+    deception: {
+      ability: {
+        type: String,
+        default: "cha",
+      },
+      rank:{
+        type: Number,
+        default: 0,
+      },
+      bonus:{
+        type: Number,
+        default: 0,
+      },
+      trained: {
+        type: Boolean,
+        default: false
+      }
+    },
+    history: {
+      ability: {
+        type: String,
+        default: "int",
+      },
+      rank:{
+        type: Number,
+        default: 0,
+      },
+      bonus:{
+        type: Number,
+        default: 0,
+      },
+      trained: {
+        type: Boolean,
+        default: false
+      }
+    },
+    insight: {
+      ability: {
+        type: String,
+        default: "wis",
+      },
+      rank:{
+        type: Number,
+        default: 0,
+      },
+      bonus:{
+        type: Number,
+        default: 0,
+      },
+      trained: {
+        type: Boolean,
+        default: false
+      }
+    },
+    intimidation: {
+      ability: {
+        type: String,
+        default: "cha",
+      },
+      rank:{
+        type: Number,
+        default: 0,
+      },
+      bonus:{
+        type: Number,
+        default: 0,
+      },
+      trained: {
+        type: Boolean,
+        default: false
+      }
+    },
+    investigation: {
+      ability: {
+        type: String,
+        default: "int",
+      },
+      rank:{
+        type: Number,
+        default: 0,
+      },
+      bonus:{
+        type: Number,
+        default: 0,
+      },
+      trained: {
+        type: Boolean,
+        default: false
+      }
+    },
+    medicine: {
+      ability: {
+        type: String,
+        default: "wis",
+      },
+      rank:{
+        type: Number,
+        default: 0,
+      },
+      bonus:{
+        type: Number,
+        default: 0,
+      },
+      trained: {
+        type: Boolean,
+        default: false
+      }
+    },
+    nature: {
+      ability: {
+        type: String,
+        default: "wis",
+      },
+      rank:{
+        type: Number,
+        default: 0,
+      },
+      bonus:{
+        type: Number,
+        default: 0,
+      },
+      trained: {
+        type: Boolean,
+        default: false
+      }
+    },
+    perception: {
+      ability: {
+        type: String,
+        default: "wis",
+      },
+      rank:{
+        type: Number,
+        default: 0,
+      },
+      bonus:{
+        type: Number,
+        default: 0,
+      },
+      trained: {
+        type: Boolean,
+        default: false
+      }
+    },
+    performance: {
+      ability: {
+        type: String,
+        default: "cha",
+      },
+      rank:{
+        type: Number,
+        default: 0,
+      },
+      bonus:{
+        type: Number,
+        default: 0,
+      },
+      trained: {
+        type: Boolean,
+        default: false
+      }
+    },
+    persuasion: {
+      ability: {
+        type: String,
+        default: "cha",
+      },
+      rank:{
+        type: Number,
+        default: 0,
+      },
+      bonus:{
+        type: Number,
+        default: 0,
+      },
+      trained: {
+        type: Boolean,
+        default: false
+      }
+    },
+    religion: {
+      ability: {
+        type: String,
+        default: "int",
+      },
+      rank:{
+        type: Number,
+        default: 0,
+      },
+      bonus:{
+        type: Number,
+        default: 0,
+      },
+      trained: {
+        type: Boolean,
+        default: false
+      }
+    },
+    sleightOfHand: {
+      ability: {
+        type: String,
+        default: "dex",
+      },
+      rank:{
+        type: Number,
+        default: 0,
+      },
+      bonus:{
+        type: Number,
+        default: 0,
+      },
+      trained: {
+        type: Boolean,
+        default: false
+      }
+    },
+    stealth: {
+      ability: {
+        type: String,
+        default: "dex",
+      },
+      rank:{
+        type: Number,
+        default: 0,
+      },
+      bonus:{
+        type: Number,
+        default: 0,
+      },
+      trained: {
+        type: Boolean,
+        default: false
+      }
+    },
+    survival: {
+      ability: {
+        type: String,
+        default: "wis",
+      },
+      rank:{
+        type: Number,
+        default: 0,
+      },
+      bonus:{
+        type: Number,
+        default: 0,
+      },
+      trained: {
+        type: Boolean,
+        default: false
+      }
+    },
+  },
+  spells: {
+    castingAbility: {
+      type: String
+    },
+    lvl0: {
+      dc: {
+        type: Number,
+      },
+      spellsKnown: [],
+    },
+    lvl1: {
+      dc: {
+        type: Number,
+      },
+      spellsKnown: [],
+    },
+    lvl2: {
+      dc: {
+        type: Number,
+      },
+      spellsKnown: [],
+    },
+    lvl3: {
+      dc: {
+        type: Number,
+      },
+      spellsKnown: [],
+    },
+    lvl4: {
+      dc: {
+        type: Number,
+      },
+      spellsKnown: [],
+    },
+    lvl5: {
+      dc: {
+        type: Number,
+      },
+      spellsKnown: [],
+    },
+    lvl6: {
+      dc: {
+        type: Number,
+      },
+      spellsKnown: [],
+    },
+    lvl7: {
+      dc: {
+        type: Number,
+      },
+      spellsKnown: [],
+    },
+    lvl8: {
+      dc: {
+        type: Number,
+      },
+      spellsKnown: [],
+    },
+    lvl9: {
+      dc: {
+        type: Number,
+      },
+      spellsKnown: [],
+    },
+  },
+  currency: {
+    cp: {
+      type: Number,
+      default: 0,
+    },
+    sp: {
+      type: Number,
+      default: 0,
+    },
+    gp: {
+      type: Number,
+      default: 0,
+    },
+    pp: {
+      type: Number,
+      default: 0,
+    },
+  },
+  equipment: [],
+  items: [],
 })
 
 const Character = mongoose.model("Character", CharacterSchema);

@@ -21,12 +21,32 @@ const UserCard = props => {
   },[socket])
 
   return(
-    <div className='border-black'>
-      <h1>Name: {userCharacter.name}</h1>
-      <span><h2>Race: {userCharacter.race}</h2><h2>Subrace: {userCharacter.subrace}</h2></span>
-      <span><h2>Class: {userCharacter.class}</h2><h2>Level: {userCharacter.level}</h2></span>
-      <span>Current HP<textarea value={hpState} onChange={handleHP}></textarea><h2>Max HP: {userCharacter.maxHP}</h2></span>
-      <span><h2>AC: {userCharacter.AC}</h2><h2>Initiative: {userCharacter.initiative}</h2><h2>Perception: {userCharacter.perception}</h2></span>
+    <div className='flex flex-col justufy-center w-3/4 border border-black text-2xl'>
+      <div className='flex justify-around items-center'>
+        <h1>{userCharacter.name}</h1>
+        {userCharacter.subrace === "" ?
+        <p>{userCharacter.race}</p>
+        :
+        <p>{userCharacter.subrace}</p>
+        }
+        <p>{userCharacter.class} {userCharacter.level}</p>
+      </div>
+      <div className='flex justify-center'>
+        <p>HP: </p>
+        <input className='w-16'
+          type="number"
+          size="3"
+          max={userCharacter.maxHP}
+          value={hpState} 
+          onChange={handleHP}>
+        </input>
+        <p>/ {userCharacter.maxHP}</p>
+      </div>
+      <div className='flex justify-around'>
+        <p>AC: {userCharacter.AC}</p>
+        <p>Initiative: {userCharacter.initiative}</p>
+        <p>Perception: {userCharacter.perception}</p>
+      </div>
     </div>
   )
 }

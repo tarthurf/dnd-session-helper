@@ -64,16 +64,16 @@ const App = () => {
       <div>
         {userCharacter.name === "" ?
           createCharacterState === false ?
-            <React.Fragment>
-              <form onSubmit={selectCharacter}>
-                <label>
-                  Select Character
-            </label>
-                <select
+            <div className='flex flex-col items-center'>
+              <form className='text-2xl flex flex-col items-center'
+                onSubmit={selectCharacter}
+              >
+                <p>Select a character</p>
+                <select className='border border-black'
                   value={characterSelect}
                   onChange={handleCharacterSelection}
                   id="name"
-                  size="6"
+                  size="10"
                 >
                   {characters.map(char => (
                     <option
@@ -84,10 +84,18 @@ const App = () => {
                     </option>
                   ))}
                 </select>
-                <button type="submit">Confirm</button>
+                <button className='border border-black m-2'
+                  type="submit"
+                >
+                  Confirm
+                </button>
               </form>
-              <button onClick={() => setCreateCharacterState(!createCharacterState)}>Create a Character</button>
-            </React.Fragment>
+              <button className='border border-black m-2'
+                onClick={() => setCreateCharacterState(!createCharacterState)}
+              >
+                Create a Character
+              </button>
+            </div>
             :
             <CreateCharacter
               state={createCharacterState}
