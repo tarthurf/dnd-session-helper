@@ -1,7 +1,7 @@
 import React from 'react';
 import useForm from '../../utils/useForm';
 import API from '../../utils/API';
-const { SubraceSwitch } = require('./switchHelpers.js')
+const { SubraceSwitch } = require('../../utils/switchHelpers.js')
 
 const SimpleBuild = props => {
 
