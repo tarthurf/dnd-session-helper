@@ -3,6 +3,7 @@ import useForm from '../../../utils/useForm';
 import API from '../../../utils/API';
 import BuildStage0 from './build_stages/BuildStage0';
 import BuildStage1 from './build_stages/BuildStage1';
+import BuildStage2 from './build_stages/BuildStage2';
 
 const ComplexBuild = props => {
 
@@ -89,6 +90,8 @@ const ComplexBuild = props => {
           trained: false
         },
       },
+      background: "acolyte",
+      languages: []
     },
     characterSubmit
   )
@@ -102,6 +105,11 @@ const ComplexBuild = props => {
     case 1 :
       return (
         <BuildStage1 buildStage={buildStage} setBuildStage={setBuildStage} charValues={values} />
+      )
+      break;
+    case 2 :
+      return (
+        <BuildStage2 buildStage={buildStage} setBuildStage={setBuildStage} charValues={values} />
       )
       break;
   } 

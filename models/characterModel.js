@@ -24,12 +24,14 @@ const CharacterSchema = new Schema({
   },
   level: {
     type: Number,
+    default: 1
   },
   alignment: {
     type: String,
   },
   speed: {
     type: Number,
+    default: 30
   },
   currentHP: {
     type: Number,
@@ -38,39 +40,65 @@ const CharacterSchema = new Schema({
     type: Number,
   },
   AC: {
-    type: Number,
+    armor: {
+      type: Number,
+      default: 10,
+    },
+    shield: {
+      type: Number,
+      default: 0
+    },
+    maxDex: {
+      type: Number,
+      default: 0
+    },
+    miscBonus: {
+      type: Number,
+      default: 0
+    },
   },
-  proficiency: {
+  proficiencyBonus: {
     type: Number,
+    default: 0
   },
   initiative: {
-    type: Number,
+    miscBonus: {
+      type: Number,
+      default: 0,
+    },
   },
   perception: {
-    type: Number,
+    miscBonus: {
+      type: Number,
+      default: 0,
+    },
   },
   background: {
     type: String,
   },
-  abilityScores: {
-    str: {
-      type: Number,
-    },
-    dex: {
-      type: Number,
-    },
-    con: {
-      type: Number,
-    },
-    int: {
-      type: Number,
-    },
-    wis: {
-      type: Number,
-    },
-    cha: {
-      type: Number,
-    },
+  str: {
+    type: Number,
+    default: 10
+  },
+  dex: {
+    type: Number,
+    default: 10
+  },
+  con: {
+    type: Number,
+    default: 10
+  },
+  int: {
+    type: Number,
+    default: 10
+  },
+  wis: {
+    type: Number,
+    default: 10
+  },
+  cha: {
+    type: Number,
+    default: 10
   },
   proficiencies: [
   ],
@@ -86,14 +114,6 @@ const CharacterSchema = new Schema({
         type: String,
         default: "dex",
       },
-      rank:{
-        type: Number,
-        default: 0,
-      },
-      bonus:{
-        type: Number,
-        default: 0,
-      },
       trained: {
         type: Boolean,
         default: false
@@ -103,14 +123,6 @@ const CharacterSchema = new Schema({
       ability: {
         type: String,
         default: "wis",
-      },
-      rank:{
-        type: Number,
-        default: 0,
-      },
-      bonus:{
-        type: Number,
-        default: 0,
       },
       trained: {
         type: Boolean,
@@ -122,14 +134,6 @@ const CharacterSchema = new Schema({
         type: String,
         default: "int",
       },
-      rank:{
-        type: Number,
-        default: 0,
-      },
-      bonus:{
-        type: Number,
-        default: 0,
-      },
       trained: {
         type: Boolean,
         default: false
@@ -139,14 +143,6 @@ const CharacterSchema = new Schema({
       ability: {
         type: String,
         default: "str",
-      },
-      rank:{
-        type: Number,
-        default: 0,
-      },
-      bonus:{
-        type: Number,
-        default: 0,
       },
       trained: {
         type: Boolean,
@@ -158,14 +154,6 @@ const CharacterSchema = new Schema({
         type: String,
         default: "cha",
       },
-      rank:{
-        type: Number,
-        default: 0,
-      },
-      bonus:{
-        type: Number,
-        default: 0,
-      },
       trained: {
         type: Boolean,
         default: false
@@ -175,14 +163,6 @@ const CharacterSchema = new Schema({
       ability: {
         type: String,
         default: "int",
-      },
-      rank:{
-        type: Number,
-        default: 0,
-      },
-      bonus:{
-        type: Number,
-        default: 0,
       },
       trained: {
         type: Boolean,
@@ -194,14 +174,6 @@ const CharacterSchema = new Schema({
         type: String,
         default: "wis",
       },
-      rank:{
-        type: Number,
-        default: 0,
-      },
-      bonus:{
-        type: Number,
-        default: 0,
-      },
       trained: {
         type: Boolean,
         default: false
@@ -211,14 +183,6 @@ const CharacterSchema = new Schema({
       ability: {
         type: String,
         default: "cha",
-      },
-      rank:{
-        type: Number,
-        default: 0,
-      },
-      bonus:{
-        type: Number,
-        default: 0,
       },
       trained: {
         type: Boolean,
@@ -230,14 +194,6 @@ const CharacterSchema = new Schema({
         type: String,
         default: "int",
       },
-      rank:{
-        type: Number,
-        default: 0,
-      },
-      bonus:{
-        type: Number,
-        default: 0,
-      },
       trained: {
         type: Boolean,
         default: false
@@ -247,14 +203,6 @@ const CharacterSchema = new Schema({
       ability: {
         type: String,
         default: "wis",
-      },
-      rank:{
-        type: Number,
-        default: 0,
-      },
-      bonus:{
-        type: Number,
-        default: 0,
       },
       trained: {
         type: Boolean,
@@ -266,14 +214,6 @@ const CharacterSchema = new Schema({
         type: String,
         default: "wis",
       },
-      rank:{
-        type: Number,
-        default: 0,
-      },
-      bonus:{
-        type: Number,
-        default: 0,
-      },
       trained: {
         type: Boolean,
         default: false
@@ -283,14 +223,6 @@ const CharacterSchema = new Schema({
       ability: {
         type: String,
         default: "wis",
-      },
-      rank:{
-        type: Number,
-        default: 0,
-      },
-      bonus:{
-        type: Number,
-        default: 0,
       },
       trained: {
         type: Boolean,
@@ -302,14 +234,6 @@ const CharacterSchema = new Schema({
         type: String,
         default: "cha",
       },
-      rank:{
-        type: Number,
-        default: 0,
-      },
-      bonus:{
-        type: Number,
-        default: 0,
-      },
       trained: {
         type: Boolean,
         default: false
@@ -319,14 +243,6 @@ const CharacterSchema = new Schema({
       ability: {
         type: String,
         default: "cha",
-      },
-      rank:{
-        type: Number,
-        default: 0,
-      },
-      bonus:{
-        type: Number,
-        default: 0,
       },
       trained: {
         type: Boolean,
@@ -338,14 +254,6 @@ const CharacterSchema = new Schema({
         type: String,
         default: "int",
       },
-      rank:{
-        type: Number,
-        default: 0,
-      },
-      bonus:{
-        type: Number,
-        default: 0,
-      },
       trained: {
         type: Boolean,
         default: false
@@ -355,14 +263,6 @@ const CharacterSchema = new Schema({
       ability: {
         type: String,
         default: "dex",
-      },
-      rank:{
-        type: Number,
-        default: 0,
-      },
-      bonus:{
-        type: Number,
-        default: 0,
       },
       trained: {
         type: Boolean,
@@ -374,14 +274,6 @@ const CharacterSchema = new Schema({
         type: String,
         default: "dex",
       },
-      rank:{
-        type: Number,
-        default: 0,
-      },
-      bonus:{
-        type: Number,
-        default: 0,
-      },
       trained: {
         type: Boolean,
         default: false
@@ -391,14 +283,6 @@ const CharacterSchema = new Schema({
       ability: {
         type: String,
         default: "wis",
-      },
-      rank:{
-        type: Number,
-        default: 0,
-      },
-      bonus:{
-        type: Number,
-        default: 0,
       },
       trained: {
         type: Boolean,

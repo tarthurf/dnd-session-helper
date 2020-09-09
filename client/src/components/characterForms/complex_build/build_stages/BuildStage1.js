@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import useForm from '../../../../utils/useForm';
-const { formatString } = require('../../../../utils/stringFormatHelper')
-const { ClassSkillsSwitch } = require('../../../../utils/switchHelpers')
-const { ClassSkillTotalSwitch } = require('../../../../utils/switchHelpers')
+const { formatString } = require('../../../../utils/helpers');
+const { ClassSkillsSwitch, ClassSkillTotalSwitch } = require('../../../../utils/switchHelpers');
 
 const BuildStage1 = props => {
 
@@ -10,7 +9,7 @@ const BuildStage1 = props => {
   const setBuildStage = props.setBuildStage;
   const charValues = props.charValues
 
-  
+
   const formDataCapture = () => {
     const checkboxes = document.getElementsByName("skills");
     const selectedCboxes = Array.prototype.slice.call(checkboxes).filter(ch => ch.checked == true);
@@ -36,8 +35,8 @@ const BuildStage1 = props => {
         onSubmit={handleSubmit}
       >
         {skillsArray.map((skill, i) => (
-          <React.Fragment key={i+1*20}>
-            <label key={i+1*10} htmlFor="skills">{formatString(skill)}</label>
+          <React.Fragment key={i + 1 * 20}>
+            <label key={i + 1 * 10} htmlFor="skills">{formatString(skill)}</label>
             <input
               key={i}
               name="skills"
@@ -50,7 +49,7 @@ const BuildStage1 = props => {
         <button
           type="submit"
         >
-          Select
+          Select Skills
         </button>
       </form>
       <React.Fragment>

@@ -16,9 +16,13 @@ module.exports = {
   create: (req, res) => {
     db.Character.create(req.body)
     .then(dbModel => res.json(dbModel))
-    .catch(err => res.status(422).json(err));
+    .catch(err => console.log(err));
   },
-
+  update: (req, res) => {
+    db.Character.findByIdAndUpdate(req.params.id, req.body)
+        .then((dbModel) => res.json(dbModel))
+        .catch((err) => res.status(422).json(err));
+},
   delete: (req, res) => {
     db.Character.find({"name": req.params.name})
     .then(dbModel => findByIdAndDelete(dbModel._id))

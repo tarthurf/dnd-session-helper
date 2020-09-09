@@ -38,6 +38,16 @@ export default {
   getCharacterByName: (name) => {
     return axios.get(`/api/character/${name}`);
   },
+
+  updateCharacterById: (id, obj) => {
+    axios
+    .put(`/api/character/update/${id}`, obj)
+    .then(response => {
+      console.log(response);
+      return response;
+    })
+    .catch(err => console.log(err));
+  },
   
   deleteCharacterByName: (name) => {
     return axios.get(`/api/character/delete/${name}`);

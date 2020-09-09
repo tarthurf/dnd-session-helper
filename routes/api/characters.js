@@ -11,6 +11,9 @@ router.route("/all")
 router.route("/:name")
 .get(controller.Character.findByName);
 
+router.route("/update/:id")
+.put(controller.Character.update)
+
 router.route("/delete/:name")
 .get(controller.Character.delete);
 

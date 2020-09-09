@@ -1,34 +1,43 @@
-import React, { useState } from 'react';
-import useForm from '../../../../utils/useForm';
-const { SubraceSwitch } = require('../../../../utils/switchHelpers')
-const { formatString } = require('../../../../utils/helpers')
+import React, { useContext, useEffect } from 'react';
+import { abilityBonusCalc, formatString } from '../../utils/helpers';
+import useForm from '../../utils/useForm';
+import { SubraceSwitch } from '../../utils/switchHelpers';
+import API from '../../utils/API';
 
-const BuildStage0 = props => {
+const CharacterEdit = props => {
 
-  let buildStage = props.buildStage;
-  const setBuildStage = props.setBuildStage;
-  const charValues = props.charValues
+  const socket = props.socket;
+  const char = props.char;
 
-  const { values, handleSubmit, handleChange } = useForm(charValues)
+  const formDataCapture = () => {
+    const checkboxes = document.getElementsByName("skills");
+    const selectedCboxes = Array.prototype.slice.call(checkboxes).filter(ch => ch.checked == true);
+    selectedCboxes.forEach(box => {
+      console.log(box.defaultValue);
+      Object.entries(values.skills).map(skill => {
+        if (box.defaultValue === skill[0]) skill[1].trained = true;
+        else skill[1].trained = false;
+      });
+    });
+    console.log(values.skills);
+  }
+
+  const updateChar = () => {
+    formDataCapture();
+    console.log(values)
+    // API.updateCharacterById(values._id, values);
+    // window.location.reload(false);
+  }
+
+  const { values, handleChange, handleSubmit } = useForm(char, updateChar)
 
   return (
-    <div className='flex flex-col items-center gap-y-2'>
-    {console.log(values.abilityScores.str)}
-      <label>
-        What is your character's name?
-        </label>
-      <input
-        name="name"
-        type="text"
-        placeholder="Enter name"
-        onChange={handleChange}
-        value={values.name}
-        required
-      />
+    <form className='flex flex-col'
+      onSubmit={handleSubmit}
+    >
+      <p>{values.name}</p>
 
-      <label>
-        What is your character's race?
-      </label>
+      <label>Race</label>
       <select
         name="race"
         onChange={handleChange}
@@ -58,12 +67,11 @@ const BuildStage0 = props => {
         {SubraceSwitch(values.race).map((subrace, i) => (
           <option key={i} value={subrace}>{formatString(subrace)}</option>
         ))}
-
       </select>
 
       <label>
         What is your character's class?
-        </label>
+      </label>
       <select
         name="class"
         onChange={handleChange}
@@ -98,8 +106,53 @@ const BuildStage0 = props => {
       />
 
       <label>
+        What is your character's alignment?
+      </label>
+      <select
+        name="alignment"
+        onChange={handleChange}
+        value={values.alignment}
+        required
+      >
+        <option value="lg">Lawful Good</option>
+        <option value="ng">Neutral Good</option>
+        <option value="cg">Chaotic Good</option>
+        <option value="ln">Lawfule Neutral</option>
+        <option value="n">Neutral</option>
+        <option value="cn">Chaotic Neutral</option>
+        <option value="le">Lawful Evil</option>
+        <option value="ne">Neutral Evil</option>
+        <option value="ce">Chaotic Evil</option>
+      </select>
+
+      <label>
+        What is your character's speed?
+      </label>
+      <input
+        name="speed"
+        type="number"
+        step={5}
+        onChange={handleChange}
+        value={values.speed}
+        required
+      >
+      </input>
+
+      <label>
+        What is your character's max HP?
+      </label>
+      <input
+        name="maxHP"
+        type="number"
+        placeholder="Enter max HP"
+        onChange={handleChange}
+        value={values.maxHP}
+        required
+      />
+
+      <label>
         Set your ability Scores (include racial adjustments)
-        </label>
+      </label>
       <p>Strength</p>
       <input
         name="str"
@@ -167,16 +220,37 @@ const BuildStage0 = props => {
       >
       </input>
 
-      <button>
-        Go Back
-      </button>
-      <button
-        onClick={() => setBuildStage(1)}
-      >
-        Next
-      </button>
-    </div>
+      <p>Skill Proficiencies:</p>
+      {Object.entries(values.skills).map((skill, i) => (
+        skill[1].trained === false ? (
+          <React.Fragment key={i+200}>
+            <label key={i+100}>{formatString(skill[0])}</label>
+            <input
+              key={i}
+              name="skills"
+              type="checkbox"
+              value={skill[0]}
+            />
+          </React.Fragment>
+        ) : (
+            <React.Fragment key={i+200}>
+              <label key={i+100}>{formatString(skill[0])}</label>
+              <input
+                key={i}
+                name="skills"
+                type="checkbox"
+                value={skill[0]}
+                defaultChecked
+              />
+            </React.Fragment>
+          )
+      ))}
+
+
+      <button type="submit">submit</button>
+
+    </form>
   )
 }
 
-export default BuildStage0;
+export default CharacterEdit;

@@ -4,6 +4,7 @@ import io from 'socket.io-client';
 import API from './utils/API';
 import CreateCharacter from "./components/CreateCharacter";
 import CharacterPool from "./components/CharacterPool";
+import Navbar from "./components/nav/Navbar";
 
 const socket = io();
 
@@ -62,6 +63,7 @@ const App = () => {
   return (
     <UserContext.Provider value={{ userCharacter }}>
       <div>
+        <Navbar socket={socket} />
         {userCharacter.name === "" ?
           createCharacterState === false ?
             <div className='flex flex-col items-center'>
