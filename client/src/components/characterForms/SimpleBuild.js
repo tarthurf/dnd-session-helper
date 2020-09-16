@@ -259,17 +259,6 @@ const SimpleBuild = props => {
           value={values.maxDex}
       ></input>
 
-      <label>Is your character proficient in Perception?</label>
-      <select
-        name="perception"
-        onChange={handleChange}
-        value={values.perception}
-        required
-      >
-        <option value={false}>No</option>
-        <option value={true}>Yes</option>
-      </select>
-
       <button className='border border-black m-2'
         type="submit"
       >

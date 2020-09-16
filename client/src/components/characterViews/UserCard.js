@@ -16,6 +16,8 @@ const UserCard = props => {
 
   const { userCharacter } = useContext(UserContext);
 
+  console.log(userCharacter)
+
   const [ hpState, sethpState ] = useState(userCharacter.currentHP)
 
   const name = userCharacter.name;
