@@ -1,13 +1,9 @@
-import React, { useContext, useState, useEffect } from 'react';
-import UserContext from '../utils/UserContext';
+import React, { useState, useEffect } from 'react';
 import CharacterCard from './characterViews/CharacterCard';
-import UserCard from './characterViews/UserCard';
 
-const CharacterPool = props => {
+const GmView = props => {
 
   const socket = props.socket;
-
-  const { userCharacter } = useContext(UserContext);
 
   const [ activeCharacters, setActiveCharacters ] = useState([]);
 
@@ -20,17 +16,11 @@ const CharacterPool = props => {
 
   return(
     <div className='flex flex-col items-center'>
-      <UserCard socket={socket} />
       {activeCharacters.map(char => (
-        char.name === userCharacter.name ?
-        null
-        :
         <CharacterCard character={char} key={char._id}/>
       ))}
-
-      
     </div>
   )
 }
 
-export default CharacterPool;
+export default GmView;

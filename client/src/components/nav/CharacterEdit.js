@@ -1,35 +1,44 @@
-import React, { useContext, useEffect } from 'react';
-import { abilityBonusCalc, formatString } from '../../utils/helpers';
+/* eslint-disable */
+
+import React, { useContext } from 'react';
+import { formatString } from '../../utils/helpers';
 import useForm from '../../utils/useForm';
 import { SubraceSwitch } from '../../utils/switchHelpers';
 import API from '../../utils/API';
+import UserContext from '../../utils/UserContext';
 
 const CharacterEdit = props => {
 
-  const socket = props.socket;
-  const char = props.char;
+  const { userCharacter } = useContext(UserContext);
 
   const formDataCapture = () => {
     const checkboxes = document.getElementsByName("skills");
     const selectedCboxes = Array.prototype.slice.call(checkboxes).filter(ch => ch.checked == true);
     selectedCboxes.forEach(box => {
-      console.log(box.defaultValue);
       Object.entries(values.skills).map(skill => {
         if (box.defaultValue === skill[0]) skill[1].trained = true;
         else skill[1].trained = false;
       });
     });
-    console.log(values.skills);
+  }
+
+  const intConvert = obj => {
+    Object.entries(obj).map(stat => {
+      if (parseInt(stat[1])) {
+        stat[1] = parseInt(stat[1]);
+        console.log(stat[0], typeof stat[1]);
+      }
+    });
   }
 
   const updateChar = () => {
     formDataCapture();
-    console.log(values)
-    // API.updateCharacterById(values._id, values);
-    // window.location.reload(false);
+    intConvert(values);
+    API.updateCharacterById(values._id, values);
+    window.location.reload(false);
   }
 
-  const { values, handleChange, handleSubmit } = useForm(char, updateChar)
+  const { values, handleChange, handleSubmit } = useForm(userCharacter, updateChar)
 
   return (
     <form className='flex flex-col'
@@ -149,6 +158,49 @@ const CharacterEdit = props => {
         value={values.maxHP}
         required
       />
+      
+      <label>
+        What is your character's Proficiency Bonus?
+      </label>
+      <input
+        name="proficiencyBonus"
+        type="number"
+        onChange={handleChange}
+        value={values.proficiencyBonus}
+        required
+      />
+
+      <label>What is your base armor bonus? (10 if not wearing armor)</label>
+      <input
+        name="ACarmor"
+        type="number"
+        onChange={handleChange}
+        value={values.ACarmor}
+      />
+
+      <label>What is your armor's maximum dex? (0 if none)</label>
+      <input
+        name="ACmax"
+        type="number"
+        onChange={handleChange}
+        value={values.ACmax}
+      />
+
+      <label>What is your base shield bonus?</label>
+      <input
+        name="ACshield"
+        type="number"
+        onChange={handleChange}
+        value={values.ACshield}
+      />
+
+      <label>Does your character have any miscellaneous armor bonuses?</label>
+      <input
+        name="ACmiscBonus"
+        type="number"
+        onChange={handleChange}
+        value={values.ACmiscBonus}
+      />
 
       <label>
         Set your ability Scores (include racial adjustments)
@@ -159,8 +211,6 @@ const CharacterEdit = props => {
         type="number"
         onChange={handleChange}
         value={values.str}
-        min={6}
-        max={18}
         required
       >
       </input>
@@ -170,8 +220,6 @@ const CharacterEdit = props => {
         type="number"
         onChange={handleChange}
         value={values.dex}
-        min={6}
-        max={18}
         required
       >
       </input>
@@ -181,8 +229,6 @@ const CharacterEdit = props => {
         type="number"
         onChange={handleChange}
         value={values.con}
-        min={6}
-        max={18}
         required
       >
       </input>
@@ -192,8 +238,6 @@ const CharacterEdit = props => {
         type="number"
         onChange={handleChange}
         value={values.int}
-        min={6}
-        max={18}
         required
       >
       </input>
@@ -203,8 +247,6 @@ const CharacterEdit = props => {
         type="number"
         onChange={handleChange}
         value={values.wis}
-        min={6}
-        max={18}
         required
       >
       </input>
@@ -214,8 +256,6 @@ const CharacterEdit = props => {
         type="number"
         onChange={handleChange}
         value={values.cha}
-        min={6}
-        max={18}
         required
       >
       </input>
@@ -245,10 +285,11 @@ const CharacterEdit = props => {
             </React.Fragment>
           )
       ))}
-
-
-      <button type="submit">submit</button>
-
+      <button className='border border-black m-2'
+        type="submit"
+      >
+        submit
+      </button>
     </form>
   )
 }

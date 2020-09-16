@@ -1,18 +1,21 @@
 import React, { useState, useContext } from 'react';
-import CharacterView from './CharacterView';
+// import CharacterView from './CharacterView';
 import CharacterEdit from './CharacterEdit';
 import UserContext from '../../utils/UserContext';
+// import SearchBar from './SearchBar';
 
 const Navbar = props => {
 
   const socket = props.socket;
+
+
 
   const { userCharacter } = useContext(UserContext)
 
   const [modalState, setModalState] = useState(false);
 
   return (
-    <nav className="px-4 flex items-center flex-grow-0 flex-shrink-0 justify-between h-16 w-full bg-black text-white text-3xl md:text-4xl shadow-lg">
+    <nav className="px-4 flex items-center flex-grow-0 flex-shrink-0 justify-between h-16 w-full bg-black text-white text-3xl md:text-2xl shadow-lg">
       {userCharacter.name === "" ?
       null
       :

@@ -5,6 +5,7 @@ import API from './utils/API';
 import CreateCharacter from "./components/CreateCharacter";
 import CharacterPool from "./components/CharacterPool";
 import Navbar from "./components/nav/Navbar";
+import GmView from './components/GmView'
 
 const socket = io();
 
@@ -28,7 +29,6 @@ const App = () => {
       .then(char => {
         const character = char.data[0];
         setUserCharacter(character);
-        console.log('UserCharacter', userCharacter)
         socket.emit('add-user-character', character);
       })
       .catch(err => console.log(err))
@@ -44,11 +44,16 @@ const App = () => {
       level: "",
       currentHP: "",
       maxHP: "",
-      AC: "",
-      initiative: "",
-      perception: "",
+      ACarmor: 10,
+      ACshield: 0,
+      ACmaxDex: 0,
+      ACmiscBonus: 0,
     }
   );
+
+  const gmLogin = () => {
+    setUserCharacter({name: "gm"})
+  }
 
   // Gets all created characters on page load
   useEffect(() => {
@@ -92,6 +97,9 @@ const App = () => {
                   Confirm
                 </button>
               </form>
+              <button onClick={() => gmLogin()}>
+                GM Login
+              </button>
               <button className='border border-black m-2'
                 onClick={() => setCreateCharacterState(!createCharacterState)}
               >
@@ -104,9 +112,15 @@ const App = () => {
               setState={setCreateCharacterState}
             />
           :
-          <div>
-            <CharacterPool socket={socket}/>
-          </div>
+          userCharacter.name === "gm" ?
+            <div>
+              <GmView socket={socket} />
+            </div>
+            :
+            <div>
+              <CharacterPool socket={socket}/>
+            </div>
+          
         }
       </div>
     </UserContext.Provider>
