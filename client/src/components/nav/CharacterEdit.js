@@ -9,24 +9,16 @@ const CharacterEdit = props => {
   const socket = props.socket;
   const char = props.char;
 
-  const formDataCapture = () => {
-    const checkboxes = document.getElementsByName("skills");
-    const selectedCboxes = Array.prototype.slice.call(checkboxes).filter(ch => ch.checked == true);
-    selectedCboxes.forEach(box => {
-      console.log(box.defaultValue);
-      Object.entries(values.skills).map(skill => {
-        if (box.defaultValue === skill[0]) skill[1].trained = true;
-        else skill[1].trained = false;
-      });
-    });
-    console.log(values.skills);
+  const stringIntConvert = obj => {
+    Object.entries(obj).map(item => {
+      if ((item[1] >>> 0 === parseFloat(item)) === true) item = parseInt(item[1]);
+      console.log(`Values: ${item[0]}: ${item[1]} is a ${typeof item[1]}`)
+    })
   }
 
   const updateChar = () => {
-    formDataCapture();
-    console.log(values)
-    // API.updateCharacterById(values._id, values);
-    // window.location.reload(false);
+    stringIntConvert(values)
+    setTimeout(() => API.updateCharacterById(values._id, values), 1000)
   }
 
   const { values, handleChange, handleSubmit } = useForm(char, updateChar)
@@ -229,7 +221,9 @@ const CharacterEdit = props => {
               key={i}
               name="skills"
               type="checkbox"
-              value={skill[0]}
+              onChange={() => skill[1].trained = !skill[1].trained}
+              value={skill[1].trained}
+              defaultChecked={false}
             />
           </React.Fragment>
         ) : (
@@ -239,8 +233,9 @@ const CharacterEdit = props => {
                 key={i}
                 name="skills"
                 type="checkbox"
-                value={skill[0]}
-                defaultChecked
+                onChange={() => skill[1].trained = !skill[1].trained}
+                value={skill[1].trained}
+                defaultChecked={true}
               />
             </React.Fragment>
           )

@@ -26,6 +26,8 @@ io.on('connection', socket => {
     socket.broadcast.emit('update-user-characters', userCharacters)
   });
 
+  // handles character update
+
   // Handle user disconnect
   // If user intentionally disconnects, their character is 
   //    removed from array and userCharacters updates on the client

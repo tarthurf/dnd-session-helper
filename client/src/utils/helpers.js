@@ -8,7 +8,15 @@ module.exports = {
     else return;
   },
 
-  abilityBonusCalc : ability => {
+  abilityBonusCalc: ability => {
     return Math.floor((ability - 10) / 2)
   },
+
+  calcDex: (dex, maxDex) => {
+    if (maxDex === 0) return dex;
+    else if (maxDex <= dex) return maxDex;
+    else return dex;
+  },
+
+  
 } 

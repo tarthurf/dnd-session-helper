@@ -62,16 +62,12 @@ const CharacterSchema = new Schema({
     default: 0
   },
   initiative: {
-    miscBonus: {
-      type: Number,
-      default: 0,
-    },
+    type: Number,
+    default: 0,
   },
   perception: {
-    miscBonus: {
-      type: Number,
-      default: 0,
-    },
+    type: Number,
+    default: 0,
   },
   background: {
     type: String,

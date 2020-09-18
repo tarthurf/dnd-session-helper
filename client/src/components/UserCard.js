@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import UserContext from '../utils/UserContext';
-import { abilityBonusCalc, formatString } from '../utils/helpers';
+import { abilityBonusCalc, formatString, calcDex } from '../utils/helpers';
 
 const UserCard = props => {
 
@@ -23,7 +23,6 @@ const UserCard = props => {
 
   return(
     <div className='flex flex-col justufy-center w-3/4 border border-black text-2xl'>
-    {console.log()}
       <div className='flex justify-around items-center'>
         <h1>{userCharacter.name}</h1>
         {userCharacter.subrace === "" ?
@@ -47,13 +46,13 @@ const UserCard = props => {
         <button onClick={() => socket.emit('update-hp', {hpState, name})}>Set HP</button>
       </div>
       <div className='flex justify-around'>
-        <p>AC: {userCharacter.AC.armor + userCharacter.AC.shield + abilityBonusCalc(userCharacter.dex) + userCharacter.AC.miscBonus}</p>
-        <p>Initiative: {abilityBonusCalc(userCharacter.dex) + userCharacter.initiative.miscBonus}</p>
+        <p>AC: {userCharacter.AC.armor + userCharacter.AC.shield + calcDex(abilityBonusCalc(userCharacter.dex), userCharacter.AC.maxDex) + userCharacter.AC.miscBonus}</p>
+        <p>Initiative: {abilityBonusCalc(userCharacter.dex)}</p>
         <p>Perception: {
           userCharacter.skills.perception.trained === true ?
-          10 + userCharacter.proficiencyBonus + abilityBonusCalc(userCharacter.wis) + userCharacter.perception.miscBonus
+          10 + userCharacter.proficiencyBonus + abilityBonusCalc(userCharacter.wis)
           :
-          10 + abilityBonusCalc(userCharacter.wis) + userCharacter.perception.miscBonus
+          10 + abilityBonusCalc(userCharacter.wis)
         }</p>
       </div>
     </div>
