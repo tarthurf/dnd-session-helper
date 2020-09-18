@@ -9,34 +9,7 @@ const SimpleBuild = props => {
   const setState = props.setState;
 
   const characterSubmit = () => {
-    API.createCharacter(
-      {
-        name: values.name,
-        race: values.race,
-        subrace: values.subrace,
-        class: values.class,
-        level: values.level,
-        maxHP: values.maxHP,
-        currentHP: values.maxHP,
-        str: values.str,
-        dex: values.dex,
-        con: values.con,
-        int: values.int,
-        wis: values.wis,
-        cha: values.cha,
-        AC: {
-          armor: values.armor,
-          shield: values.shield,
-          maxDex: values.maxDex
-        },
-        skills: {
-          perception: {
-            trained: values.perception
-          }
-        },
-        proficiencyBonus: values.proficiency
-      }
-    )
+    API.createCharacter(values)
     setState(!state)
   }
 
@@ -57,9 +30,9 @@ const SimpleBuild = props => {
       cha: 10,
       armor: 10,
       shield: 0,
-      maxDex: 0,
-      perception: false,
-      proficiency: 0,
+      maximumDexterity: 0,
+      acMiscBonus: 0,
+      proficiencyBonus: 0,
     },
     characterSubmit
   )
@@ -158,6 +131,8 @@ const SimpleBuild = props => {
         type="number"
         onChange={handleChange}
         value={values.maxHP}
+        min={1}
+        max={99}
         required
       />
 
@@ -170,8 +145,8 @@ const SimpleBuild = props => {
         type="number"
         onChange={handleChange}
         value={values.str}
-        min={6}
-        max={18}
+        min={1}
+        max={20}
         required
       ></input>
       <p>Dexterity</p>
@@ -180,8 +155,8 @@ const SimpleBuild = props => {
         type="number"
         onChange={handleChange}
         value={values.dex}
-        min={6}
-        max={18}
+        min={1}
+        max={20}
         required
       ></input>
       <p>Constitution</p>
@@ -190,8 +165,8 @@ const SimpleBuild = props => {
         type="number"
         onChange={handleChange}
         value={values.con}
-        min={6}
-        max={18}
+        min={1}
+        max={20}
         required
       ></input>
       <p>Intelligence</p>
@@ -200,8 +175,8 @@ const SimpleBuild = props => {
         type="number"
         onChange={handleChange}
         value={values.int}
-        min={6}
-        max={18}
+        min={1}
+        max={20}
         required
       ></input>
       <p>Wisdom</p>
@@ -210,8 +185,8 @@ const SimpleBuild = props => {
         type="number"
         onChange={handleChange}
         value={values.wis}
-        min={6}
-        max={18}
+        min={1}
+        max={20}
         required
       ></input>
       <p>Charisma</p>
@@ -220,18 +195,19 @@ const SimpleBuild = props => {
         type="number"
         onChange={handleChange}
         value={values.cha}
-        min={6}
-        max={18}
+        min={1}
+        max={20}
         required
       ></input>
 
       <label>What is your proficiency bonus?</label>
       <input
-        name="proficiency"
+        name="proficiencyBonus"
         type="number"
         onChange={handleChange}
-        value={values.proficiency}
+        value={values.proficiencyBonus}
         min={0}
+        max={99}
       ></input>
 
       <label>What is your armor bonus (No armor = 10)</label>
@@ -241,6 +217,7 @@ const SimpleBuild = props => {
         onChange={handleChange}
         value={values.armor}
         min={10}
+        max={99}
       ></input>
 
       <label>What is your shield bonus</label>
@@ -249,32 +226,35 @@ const SimpleBuild = props => {
         type="number"
         onChange={handleChange}
         value={values.shield}
+        min={0}
+        max={99}
       ></input>
 
-      <label>What is your max dexterity for your armor?</label>
+      <label>What is your max dexterity for your armor (0 if no maximum dexterity)?</label>
       <input
-          name="maxDex"
-          type="number"
-          onChange={handleChange}
-          value={values.maxDex}
+        name="maximumDexterity"
+        type="number"
+        onChange={handleChange}
+        value={values.maximumDexterity}
+        min={0}
+        max={99}
       ></input>
 
-      <label>Is your character proficient in Perception?</label>
-      <select
-        name="perception"
+      <label>Do you have any miscellaneous bonuses to your armor class?</label>
+      <input
+        name="acMiscBonus"
+        type="number"
         onChange={handleChange}
-        value={values.perception}
-        required
-      >
-        <option value={false}>No</option>
-        <option value={true}>Yes</option>
-      </select>
+        value={values.acMiscBonus}
+        min={0}
+        max={99}
+      ></input>
 
       <button className='border border-black m-2'
         type="submit"
       >
         Create character
-        </button>
+      </button>
     </form>
   )
 }

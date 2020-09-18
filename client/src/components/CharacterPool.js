@@ -21,7 +21,11 @@ const CharacterPool = props => {
 
   return(
     <div className='flex flex-col items-center'>
-      <UserCard socket={socket} />
+      {userCharacter.name === "" ?
+        null
+        :
+        <UserCard socket={socket} />
+      }
       {activeCharacters.map(char => (
         char.name === userCharacter.name ?
         null

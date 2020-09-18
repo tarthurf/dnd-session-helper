@@ -136,9 +136,19 @@ const CharacterEdit = props => {
       <input
         name="maxHP"
         type="number"
-        placeholder="Enter max HP"
         onChange={handleChange}
         value={values.maxHP}
+        required
+      />
+
+      <label>
+        What is your character's proficiency bonus?
+      </label>
+      <input
+        name="proficiencyBonus"
+        type="number"
+        onChange={handleChange}
+        value={values.proficiencyBonus}
         required
       />
 
