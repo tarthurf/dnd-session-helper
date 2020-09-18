@@ -143,6 +143,54 @@ const CharacterEdit = props => {
       />
 
       <label>
+        What is your character's base armor (10 if not wearing armor?
+      </label>
+      <input
+        name="armor"
+        type="number"
+        onChange={handleChange}
+        value={values.armor}
+        min={10}
+        required
+      />
+
+      <label>
+        What is your character's shield bonus?
+      </label>
+      <input
+        name="shield"
+        type="number"
+        onChange={handleChange}
+        value={values.shield}
+        min={0}
+        required
+      />
+
+      <label>
+        What is your armor's maximum dexterity bonus?
+      </label>
+      <input
+        name="maximumDexterity"
+        type="number"
+        onChange={handleChange}
+        value={values.maximumDexterity}
+        min={0}
+        required
+      />
+
+      <label>
+        Do you get any other bonuses to your armor class?
+      </label>
+      <input
+        name="acMiscBonus"
+        type="number"
+        onChange={handleChange}
+        value={values.acMiscBonus}
+        min={0}
+        required
+      />
+
+      <label>
         Set your ability Scores (include racial adjustments)
       </label>
       <p>Strength</p>

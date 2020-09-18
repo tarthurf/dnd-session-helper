@@ -46,7 +46,7 @@ const UserCard = props => {
         <button onClick={() => socket.emit('update-hp', {hpState, name})}>Set HP</button>
       </div>
       <div className='flex justify-around'>
-        <p>AC: {userCharacter.AC.armor + userCharacter.AC.shield + calcDex(abilityBonusCalc(userCharacter.dex), userCharacter.AC.maxDex) + userCharacter.AC.miscBonus}</p>
+        <p>AC: {userCharacter.armor + userCharacter.shield + calcDex(abilityBonusCalc(userCharacter.dex), userCharacter.maximumDexterity) + userCharacter.acMiscBonus}</p>
         <p>Initiative: {abilityBonusCalc(userCharacter.dex)}</p>
         <p>Perception: {
           userCharacter.skills.perception.trained === true ?

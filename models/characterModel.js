@@ -39,23 +39,21 @@ const CharacterSchema = new Schema({
   maxHP: {
     type: Number,
   },
-  AC: {
-    armor: {
-      type: Number,
-      default: 10,
-    },
-    shield: {
-      type: Number,
-      default: 0
-    },
-    maxDex: {
-      type: Number,
-      default: 0
-    },
-    miscBonus: {
-      type: Number,
-      default: 0
-    },
+  armor: {
+    type: Number,
+    default: 10,
+  },
+  shield: {
+    type: Number,
+    default: 0
+  },
+  maximumDexterity: {
+    type: Number,
+    default: 0
+  },
+  acMiscBonus: {
+    type: Number,
+    default: 0
   },
   proficiencyBonus: {
     type: Number,
