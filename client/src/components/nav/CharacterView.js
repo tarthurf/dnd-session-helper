@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react';
-import { abilityBonusCalc, formatString } from '../../utils/helpers';
+import React, { useEffect } from 'react';
+import { abilityBonusCalc } from '../../utils/helpers';
 
 const CharacterView = props => {
 

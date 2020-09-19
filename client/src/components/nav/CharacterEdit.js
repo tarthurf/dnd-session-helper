@@ -3,11 +3,11 @@ import { abilityBonusCalc, formatString, calcDex } from '../../utils/helpers';
 import useForm from '../../utils/useForm';
 import { SubraceSwitch } from '../../utils/switchHelpers';
 import API from '../../utils/API';
+import UserContext from '../../utils/UserContext';
 
 const CharacterEdit = props => {
 
-  const socket = props.socket;
-  const char = props.char;
+  const { userCharacter } = useContext(UserContext);
 
   const stringIntConvert = obj => {
     Object.entries(obj).map(item => {
@@ -21,7 +21,7 @@ const CharacterEdit = props => {
     setTimeout(() => API.updateCharacterById(values._id, values), 1000)
   }
 
-  const { values, handleChange, handleSubmit } = useForm(char, updateChar)
+  const { values, handleChange, handleSubmit } = useForm(userCharacter, updateChar)
 
   const abilityBonus = {
     str: abilityBonusCalc(values.str),

@@ -29,7 +29,6 @@ const App = () => {
       .then(char => {
         const character = char.data[0];
         setUserCharacter(character);
-        console.log('UserCharacter', userCharacter)
         socket.emit('add-user-character', character);
       })
       .catch(err => console.log(err))
@@ -45,11 +44,16 @@ const App = () => {
       level: "",
       currentHP: "",
       maxHP: "",
-      AC: "",
-      initiative: "",
-      perception: "",
+      ACarmor: 10,
+      ACshield: 0,
+      ACmaxDex: 0,
+      ACmiscBonus: 0,
     }
   );
+
+  const gmLogin = () => {
+    setUserCharacter({name: "gm"})
+  }
 
   // Gets all created characters on page load
   useEffect(() => {

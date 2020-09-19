@@ -60,7 +60,7 @@ const CharacterSchema = new Schema({
     type: Number,
     default: 0
   },
-  proficiencyBonus: {
+  ACshield: {
     type: Number,
     default: 0
   },

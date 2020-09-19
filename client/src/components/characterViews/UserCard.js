@@ -1,12 +1,21 @@
 import React, { useContext, useState, useEffect } from 'react';
-import UserContext from '../utils/UserContext';
-import { abilityBonusCalc, formatString, calcDex } from '../utils/helpers';
+import UserContext from '../../utils/UserContext';
+import { abilityBonusCalc, formatString, calcDex } from '../../utils/helpers';
 
 const UserCard = props => {
 
   const socket = props.socket
 
+  const maxDex = () => {
+    const dex = abilityBonusCalc(userCharacter.dex)
+    const maxDex = userCharacter.ACmax
+    if (maxDex !== 0 && dex >= maxDex) return maxDex;
+    else return dex;
+  }
+
   const { userCharacter } = useContext(UserContext);
+
+  console.log(userCharacter)
 
   const [ hpState, sethpState ] = useState(userCharacter.currentHP)
 
@@ -15,7 +24,6 @@ const UserCard = props => {
   const handleHP = e => {
     sethpState(e.target.value);
     console.log(hpState)
-    // socket.emit('update-hp', {hpState, name});
   };
 
   useEffect(() => {
@@ -43,7 +51,12 @@ const UserCard = props => {
         >
         </input>
         <p>/ {userCharacter.maxHP}</p>
-        <button onClick={() => socket.emit('update-hp', {hpState, name})}>Set HP</button>
+        <button className='border border-black ml-2 px-1'
+          onClick={() => {
+          socket.emit('update-hp', {hpState, name});
+          }}>
+          Set HP 
+        </button>
       </div>
       <div className='flex justify-around space-x-4'>
         <p>AC: {userCharacter.armor + userCharacter.shield + calcDex(abilityBonusCalc(userCharacter.dex), userCharacter.maximumDexterity) + userCharacter.acMiscBonus}</p>

@@ -7,37 +7,40 @@ const CharacterSelect = props => {
 
   const characters = props.characters
 
-  const [ userCharacter, setUserCharacter ] = useContext(UserContext);
+  const [userCharacter, setUserCharacter] = useContext(UserContext);
 
   const selectCharacter = () => {
     API.getCharacterByName(values.name)
-    .then(data => {
-      const character = data.data[0];
-      setUserCharacter = character;
-      console.log("characer picked",userCharacter)
-    })
-    .catch(err => console.log(err))
+      .then(data => {
+        const character = data.data[0];
+        setUserCharacter = character;
+        console.log("characer picked", userCharacter)
+      })
+      .catch(err => console.log(err))
   }
 
+
+
   const { values, handleChange, handleSubmit } = useForm(
-    {name: ''},
+    { name: '' },
     selectCharacter
   )
 
-  return(
-    <form onSubmit={handleSubmit}>
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
         <label>
           Select Character
         </label>
         <select
-        onChange={handleChange}
+          onChange={handleChange}
           name="name"
           id="name"
           size="6"
         >
           {characters.map(char => (
-            <option 
-              key={char._id} 
+            <option
+              key={char._id}
               value={char.name}
             >
               {char.name}
@@ -46,8 +49,8 @@ const CharacterSelect = props => {
         </select>
         <button type="submit">Confirm</button>
       </form>
+    </div>
   )
-
 }
 
 export default CharacterSelect;
