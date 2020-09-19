@@ -65,7 +65,7 @@ const App = () => {
     <UserContext.Provider value={{ userCharacter }}>
       <Navbar socket={socket} />
       <div className='flex justify-around'>
-        <div>
+        <div className='flex flex-col flex-1'>
           {userCharacter.name === "" ?
             createCharacterState === false ?
               <div className='flex flex-col items-center'>
@@ -112,7 +112,7 @@ const App = () => {
             />
           }
         </div>
-        <div>
+        <div className='flex flex-col flex-1'>
           <CharacterPool socket={socket} />
         </div>
       </div>

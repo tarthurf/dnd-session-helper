@@ -20,6 +20,7 @@ const SimpleBuild = props => {
       subrace: "",
       class: "Barbarian",
       level: 1,
+      background: "Acolyte",
       maxHP: 0,
       currentHP: 0,
       str: 10,
@@ -122,6 +123,34 @@ const SimpleBuild = props => {
         max={20}
         required
       />
+
+      <label>
+        What is your character's background?
+      </label>
+      <select
+        name="background"
+        onChange={handleChange}
+        value={values.background}
+        required
+      >
+        <option value="acolyte">Acolyte</option>
+        <option value="charlatan">Charlatan</option>
+        <option value="criminal">Criminal</option>
+        <option value="entertainer">Entertainer</option>
+        <option value="folkHero">Folk Hero</option>
+        <option value="guildArtisan">Guild Artisan</option>
+        <option value="guildMerchant">Guild Merchant</option>
+        <option value="hermit">Hermit</option>
+        <option value="knight">Knight</option>
+        <option value="noble">Noble</option>
+        <option value="outlander">Outlander</option>
+        <option value="pirate">Pirate</option>
+        <option value="sage">Sage</option>
+        <option value="sailor">Sailor</option>
+        <option value="soldier">Soldier</option>
+        <option value="spy">Spy</option>
+        <option value="urchin">Urchin</option>
+      </select>
 
       <label>
         What is your character's max HP?

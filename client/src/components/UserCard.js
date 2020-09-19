@@ -22,8 +22,8 @@ const UserCard = props => {
   },[socket])
 
   return(
-    <div className='flex flex-col justufy-center w-3/4 border border-black text-2xl'>
-      <div className='flex justify-around items-center'>
+    <div className='flex flex-col justufy-center m-2 p-2 border border-black text-2xl space-y-2'>
+      <div className='flex justify-around items-center space-x-4'>
         <h1>{userCharacter.name}</h1>
         {userCharacter.subrace === "" ?
         <p>{formatString(userCharacter.race)}</p>
@@ -32,12 +32,12 @@ const UserCard = props => {
         }
         <p>{formatString(userCharacter.class)} {userCharacter.level}</p>
       </div>
-      <div className='flex justify-center'>
+      <div className='flex justify-center space-x-4'>
         <p>HP: </p>
         <input className='w-16'
           type="number"
           size="3"
-          max={userCharacter.maxHP}
+          max={999}
           value={hpState} 
           onChange={handleHP}
         >
@@ -45,7 +45,7 @@ const UserCard = props => {
         <p>/ {userCharacter.maxHP}</p>
         <button onClick={() => socket.emit('update-hp', {hpState, name})}>Set HP</button>
       </div>
-      <div className='flex justify-around'>
+      <div className='flex justify-around space-x-4'>
         <p>AC: {userCharacter.armor + userCharacter.shield + calcDex(abilityBonusCalc(userCharacter.dex), userCharacter.maximumDexterity) + userCharacter.acMiscBonus}</p>
         <p>Initiative: {abilityBonusCalc(userCharacter.dex)}</p>
         <p>Perception: {

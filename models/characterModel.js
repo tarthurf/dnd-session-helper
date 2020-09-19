@@ -38,6 +38,11 @@ const CharacterSchema = new Schema({
   },
   maxHP: {
     type: Number,
+    default: 0,
+  },
+  tempHP: {
+    type: Number,
+    default: 0,
   },
   armor: {
     type: Number,
@@ -102,6 +107,32 @@ const CharacterSchema = new Schema({
   ],
   languages: [
   ],
+  saves: {
+    str: {
+      type: Boolean,
+      default: false,
+    },
+    dex: {
+      type: Boolean,
+      default: false,
+    },
+    con: {
+      type: Boolean,
+      default: false,
+    },
+    int: {
+      type: Boolean,
+      default: false,
+    },
+    wis: {
+      type: Boolean,
+      default: false,
+    },
+    cha: {
+      type: Boolean,
+      default: false,
+    },
+  },
   skills: {
     acrobatics: {
       ability: {
