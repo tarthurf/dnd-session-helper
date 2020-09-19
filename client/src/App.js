@@ -5,11 +5,7 @@ import API from './utils/API';
 import CreateCharacter from "./components/CreateCharacter";
 import CharacterPool from "./components/CharacterPool";
 import Navbar from "./components/nav/Navbar";
-<<<<<<< HEAD
 import CharacterEdit from "./components/nav/CharacterEdit";
-=======
-import GmView from './components/GmView'
->>>>>>> bd3ae09c0b5021521f5b05ac302ca24b607f19eb
 
 const socket = io();
 
@@ -105,20 +101,7 @@ const App = () => {
                 <button className='border border-black m-2'
                   onClick={() => setCreateCharacterState(!createCharacterState)}
                 >
-<<<<<<< HEAD
                   Create a Character
-=======
-                  Confirm
-                </button>
-              </form>
-              <button onClick={() => gmLogin()}>
-                GM Login
-              </button>
-              <button className='border border-black m-2'
-                onClick={() => setCreateCharacterState(!createCharacterState)}
-              >
-                Create a Character
->>>>>>> bd3ae09c0b5021521f5b05ac302ca24b607f19eb
               </button>
               </div>
               :
@@ -131,25 +114,11 @@ const App = () => {
               char={userCharacter}
               socket={socket}
             />
-<<<<<<< HEAD
           }
         </div>
         <div className='flex flex-col flex-1'>
           <CharacterPool socket={socket} />
         </div>
-=======
-          :
-          userCharacter.name === "gm" ?
-            <div>
-              <GmView socket={socket} />
-            </div>
-            :
-            <div>
-              <CharacterPool socket={socket}/>
-            </div>
-          
-        }
->>>>>>> bd3ae09c0b5021521f5b05ac302ca24b607f19eb
       </div>
 
     </UserContext.Provider>

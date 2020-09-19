@@ -1,12 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
-<<<<<<< HEAD:client/src/components/UserCard.js
 import UserContext from '../utils/UserContext';
 import { abilityBonusCalc, formatString, calcDex } from '../utils/helpers';
-=======
-import UserContext from '../../utils/UserContext';
-import { abilityBonusCalc, formatString } from '../../utils/helpers';
-import API from '../../utils/API'
->>>>>>> bd3ae09c0b5021521f5b05ac302ca24b607f19eb:client/src/components/characterViews/UserCard.js
 
 const UserCard = props => {
 
@@ -36,13 +30,8 @@ const UserCard = props => {
   },[socket])
 
   return(
-<<<<<<< HEAD:client/src/components/UserCard.js
     <div className='flex flex-col justufy-center m-2 p-2 border border-black text-2xl space-y-2'>
       <div className='flex justify-around items-center space-x-4'>
-=======
-    <div className='flex flex-col justufy-center w-3/4 border border-black text-2xl'>
-      <div className='flex justify-around items-center'>
->>>>>>> bd3ae09c0b5021521f5b05ac302ca24b607f19eb:client/src/components/characterViews/UserCard.js
         <h1>{userCharacter.name}</h1>
         {userCharacter.subrace === "" ?
         <p>{formatString(userCharacter.race)}</p>
@@ -70,13 +59,8 @@ const UserCard = props => {
           Set HP 
         </button>
       </div>
-<<<<<<< HEAD:client/src/components/UserCard.js
       <div className='flex justify-around space-x-4'>
         <p>AC: {userCharacter.armor + userCharacter.shield + calcDex(abilityBonusCalc(userCharacter.dex), userCharacter.maximumDexterity) + userCharacter.acMiscBonus}</p>
-=======
-      <div className='flex justify-around'>
-        <p>AC: {userCharacter.ACarmor + maxDex() + userCharacter.ACshield + userCharacter.ACmiscBonus}</p>
->>>>>>> bd3ae09c0b5021521f5b05ac302ca24b607f19eb:client/src/components/characterViews/UserCard.js
         <p>Initiative: {abilityBonusCalc(userCharacter.dex)}</p>
         <p>Perception: {
           userCharacter.skills.perception.trained === true ?

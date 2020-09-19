@@ -1,12 +1,5 @@
-<<<<<<< HEAD
 import React, { useContext, useEffect } from 'react';
 import { abilityBonusCalc, formatString, calcDex } from '../../utils/helpers';
-=======
-/* eslint-disable */
-
-import React, { useContext } from 'react';
-import { formatString } from '../../utils/helpers';
->>>>>>> bd3ae09c0b5021521f5b05ac302ca24b607f19eb
 import useForm from '../../utils/useForm';
 import { SubraceSwitch } from '../../utils/switchHelpers';
 import API from '../../utils/API';
@@ -16,7 +9,6 @@ const CharacterEdit = props => {
 
   const { userCharacter } = useContext(UserContext);
 
-<<<<<<< HEAD
   const stringIntConvert = obj => {
     Object.entries(obj).map(item => {
       if ((item[1] >>> 0 === parseFloat(item)) === true) item = parseInt(item[1]);
@@ -27,33 +19,6 @@ const CharacterEdit = props => {
   const updateChar = () => {
     stringIntConvert(values)
     setTimeout(() => API.updateCharacterById(values._id, values), 1000)
-=======
-  const formDataCapture = () => {
-    const checkboxes = document.getElementsByName("skills");
-    const selectedCboxes = Array.prototype.slice.call(checkboxes).filter(ch => ch.checked == true);
-    selectedCboxes.forEach(box => {
-      Object.entries(values.skills).map(skill => {
-        if (box.defaultValue === skill[0]) skill[1].trained = true;
-        else skill[1].trained = false;
-      });
-    });
-  }
-
-  const intConvert = obj => {
-    Object.entries(obj).map(stat => {
-      if (parseInt(stat[1])) {
-        stat[1] = parseInt(stat[1]);
-        console.log(stat[0], typeof stat[1]);
-      }
-    });
-  }
-
-  const updateChar = () => {
-    formDataCapture();
-    intConvert(values);
-    API.updateCharacterById(values._id, values);
-    window.location.reload(false);
->>>>>>> bd3ae09c0b5021521f5b05ac302ca24b607f19eb
   }
 
   const { values, handleChange, handleSubmit } = useForm(userCharacter, updateChar)
@@ -243,7 +208,6 @@ const CharacterEdit = props => {
           </input>
           <p>{abilityBonusCalc(values.int)}</p>
 
-<<<<<<< HEAD
           <p>Wisdom</p>
           <input className='text-2xl pl-12'
             name="wis"
@@ -269,120 +233,6 @@ const CharacterEdit = props => {
           >
           </input>
           <p>{abilityBonusCalc(values.cha)}</p>
-=======
-      <label>
-        What is your character's max HP?
-      </label>
-      <input
-        name="maxHP"
-        type="number"
-        placeholder="Enter max HP"
-        onChange={handleChange}
-        value={values.maxHP}
-        required
-      />
-      
-      <label>
-        What is your character's Proficiency Bonus?
-      </label>
-      <input
-        name="proficiencyBonus"
-        type="number"
-        onChange={handleChange}
-        value={values.proficiencyBonus}
-        required
-      />
-
-      <label>What is your base armor bonus? (10 if not wearing armor)</label>
-      <input
-        name="ACarmor"
-        type="number"
-        onChange={handleChange}
-        value={values.ACarmor}
-      />
-
-      <label>What is your armor's maximum dex? (0 if none)</label>
-      <input
-        name="ACmax"
-        type="number"
-        onChange={handleChange}
-        value={values.ACmax}
-      />
-
-      <label>What is your base shield bonus?</label>
-      <input
-        name="ACshield"
-        type="number"
-        onChange={handleChange}
-        value={values.ACshield}
-      />
-
-      <label>Does your character have any miscellaneous armor bonuses?</label>
-      <input
-        name="ACmiscBonus"
-        type="number"
-        onChange={handleChange}
-        value={values.ACmiscBonus}
-      />
-
-      <label>
-        Set your ability Scores (include racial adjustments)
-      </label>
-      <p>Strength</p>
-      <input
-        name="str"
-        type="number"
-        onChange={handleChange}
-        value={values.str}
-        required
-      >
-      </input>
-      <p>Dexterity</p>
-      <input
-        name="dex"
-        type="number"
-        onChange={handleChange}
-        value={values.dex}
-        required
-      >
-      </input>
-      <p>Constitution</p>
-      <input
-        name="con"
-        type="number"
-        onChange={handleChange}
-        value={values.con}
-        required
-      >
-      </input>
-      <p>Intelligence</p>
-      <input
-        name="int"
-        type="number"
-        onChange={handleChange}
-        value={values.int}
-        required
-      >
-      </input>
-      <p>Wisdom</p>
-      <input
-        name="wis"
-        type="number"
-        onChange={handleChange}
-        value={values.wis}
-        required
-      >
-      </input>
-      <p>Charisma</p>
-      <input
-        name="cha"
-        type="number"
-        onChange={handleChange}
-        value={values.cha}
-        required
-      >
-      </input>
->>>>>>> bd3ae09c0b5021521f5b05ac302ca24b607f19eb
 
         </div>
         <div className='flex flex-col mx-2 border border-black p-1'>
@@ -598,7 +448,6 @@ const CharacterEdit = props => {
                 max={999}
                 required
               />
-<<<<<<< HEAD
               <label>Temp Hit Points</label>
             </div>
           </div>
@@ -608,16 +457,6 @@ const CharacterEdit = props => {
 
       <button type="submit">submit</button>
 
-=======
-            </React.Fragment>
-          )
-      ))}
-      <button className='border border-black m-2'
-        type="submit"
-      >
-        submit
-      </button>
->>>>>>> bd3ae09c0b5021521f5b05ac302ca24b607f19eb
     </form>
   )
 }
