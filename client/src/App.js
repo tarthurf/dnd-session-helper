@@ -104,8 +104,12 @@ const App = () => {
                     Confirm
                 </button>
                 </form>
-                <button onClick={gmLogin}>GM</button>
-                <button className='border border-black m-2'
+                <button className='border border-black m-2 px-2'
+                  onClick={gmLogin}
+                >
+                  GM
+                </button>
+                <button className='border border-black m-2 px-2'
                   onClick={() => setCreateCharacterState(!createCharacterState)}
                 >
                   Create a Character
