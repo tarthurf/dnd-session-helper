@@ -26,6 +26,15 @@ io.on('connection', socket => {
   });
 
   // handles character update
+  socket.on('update-character', data=> {
+    userCharacters.filter((char, i) => {
+      if (char.name === data.name) {
+        userCharacters.splice(i, 1);
+        socket.emit('add-user-character', data);
+        socket.emit('update-current-character', data)
+      }
+    })
+  })
 
   // Handle user disconnect
   // If user intentionally disconnects, their character is 

@@ -60,18 +60,6 @@ const CharacterSchema = new Schema({
     type: Number,
     default: 0
   },
-  ACshield: {
-    type: Number,
-    default: 0
-  },
-  initiative: {
-    type: Number,
-    default: 0,
-  },
-  perception: {
-    type: Number,
-    default: 0,
-  },
   background: {
     type: String,
   },
@@ -98,6 +86,10 @@ const CharacterSchema = new Schema({
   cha: {
     type: Number,
     default: 10
+  },
+  proficiencyBonus: {
+    type: Number,
+    default: 0,
   },
   proficiencies: [
   ],

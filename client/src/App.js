@@ -5,7 +5,7 @@ import API from './utils/API';
 import CreateCharacter from "./components/CreateCharacter";
 import CharacterPool from "./components/CharacterPool";
 import Navbar from "./components/nav/Navbar";
-import CharacterEdit from "./components/nav/CharacterEdit";
+import CharacterEdit from "./components/characterViews/CharacterEdit";
 
 const socket = io();
 
@@ -34,6 +34,10 @@ const App = () => {
       .catch(err => console.log(err))
   }
 
+  const gmLogin = () => {
+    setUserCharacter({ name: 'gm' })
+  }
+
   // State for users selected character
   const [userCharacter, setUserCharacter] = useState(
     {
@@ -51,10 +55,6 @@ const App = () => {
     }
   );
 
-  const gmLogin = () => {
-    setUserCharacter({name: "gm"})
-  }
-
   // Gets all created characters on page load
   useEffect(() => {
     API.getAllCharacters()
@@ -64,6 +64,12 @@ const App = () => {
         setCharacters(charactersArr)
       })
   }, [])
+
+  useEffect(() => {
+    socket.on('update-current-character', data => {
+      setUserCharacter(data);
+    })
+  }, [socket])
 
   return (
     <UserContext.Provider value={{ userCharacter }}>
@@ -98,6 +104,7 @@ const App = () => {
                     Confirm
                 </button>
                 </form>
+                <button onClick={gmLogin}>GM</button>
                 <button className='border border-black m-2'
                   onClick={() => setCreateCharacterState(!createCharacterState)}
                 >
@@ -110,10 +117,13 @@ const App = () => {
                 setState={setCreateCharacterState}
               />
             :
-            <CharacterEdit
-              char={userCharacter}
-              socket={socket}
-            />
+            userCharacter.name === 'gm' ?
+              null
+              :
+              <CharacterEdit
+                char={userCharacter}
+                socket={socket}
+              />
           }
         </div>
         <div className='flex flex-col flex-1'>

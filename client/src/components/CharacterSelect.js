@@ -19,8 +19,6 @@ const CharacterSelect = props => {
       .catch(err => console.log(err))
   }
 
-
-
   const { values, handleChange, handleSubmit } = useForm(
     { name: '' },
     selectCharacter

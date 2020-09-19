@@ -9,30 +9,33 @@ const CharacterPool = props => {
 
   const { userCharacter } = useContext(UserContext);
 
-  const [ activeCharacters, setActiveCharacters ] = useState([]);
+  const [activeCharacters, setActiveCharacters] = useState([]);
 
   useEffect(() => {
     socket.on('update-user-characters', data => {
       // Updates player array from backend array
       setActiveCharacters(data);
     })
-  },[])
+  }, [])
 
-  return(
+  return (
     <div className='flex flex-col items-center'>
       {userCharacter.name === "" ?
         null
         :
-        <UserCard socket={socket} />
+        userCharacter.name === 'gm' ?
+          null
+          :
+          <UserCard socket={socket} />
       }
       {activeCharacters.map(char => (
         char.name === userCharacter.name ?
-        null
-        :
-        <CharacterCard character={char} key={char._id}/>
+          null
+          :
+          <CharacterCard character={char} key={char._id} />
       ))}
 
-      
+
     </div>
   )
 }

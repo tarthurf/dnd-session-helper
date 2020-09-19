@@ -7,6 +7,8 @@ import UserContext from '../../utils/UserContext';
 
 const CharacterEdit = props => {
 
+  const socket = props.socket;
+
   const { userCharacter } = useContext(UserContext);
 
   const stringIntConvert = obj => {
@@ -18,8 +20,9 @@ const CharacterEdit = props => {
 
   const updateChar = () => {
     stringIntConvert(values)
+    setTimeout(() => socket.emit('update-character', values), 1000)
     setTimeout(() => API.updateCharacterById(values._id, values), 1000)
-    // setTimeout(() => console.log(values), 1000)
+
   }
 
   const { values, handleChange, handleSubmit } = useForm(userCharacter, updateChar)
@@ -324,7 +327,7 @@ const CharacterEdit = props => {
                     />
                     <p>{Object.entries(abilityBonus).map(ability => (
                       ability[0] === skill[1].ability ?
-                        ability[1] + values.proficiencyBonus
+                        parseInt(ability[1]) + parseInt(values.proficiencyBonus)
                         :
                         null
                     ))}</p>
@@ -452,12 +455,13 @@ const CharacterEdit = props => {
               <label>Temp Hit Points</label>
             </div>
           </div>
+          <button className='border border-black bg-green-300 m-2'
+            type="submit"
+          >
+            Update {userCharacter.name}
+          </button>
         </div>
       </div>
-
-
-      <button type="submit">submit</button>
-
     </form>
   )
 }
