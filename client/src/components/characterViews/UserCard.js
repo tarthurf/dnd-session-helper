@@ -6,16 +6,8 @@ const UserCard = props => {
 
   const socket = props.socket
 
-  const maxDex = () => {
-    const dex = abilityBonusCalc(userCharacter.dex)
-    const maxDex = userCharacter.ACmax
-    if (maxDex !== 0 && dex >= maxDex) return maxDex;
-    else return dex;
-  }
-
   const { userCharacter } = useContext(UserContext);
 
-  console.log(userCharacter)
 
   const [ hpState, sethpState ] = useState(userCharacter.currentHP)
 

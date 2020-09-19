@@ -13,6 +13,7 @@ module.exports = {
   },
 
   calcDex: (dex, maxDex) => {
+    if (maxDex <= -1) return 0;
     if (maxDex === 0) return dex;
     else if (maxDex <= dex) return maxDex;
     else return dex;

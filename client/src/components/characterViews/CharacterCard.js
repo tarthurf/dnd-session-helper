@@ -1,20 +1,13 @@
 import React from 'react';
-import { abilityBonusCalc, formatString } from '../../utils/helpers';
+import { abilityBonusCalc, formatString, calcDex } from '../../utils/helpers';
 
 const CharacterCard = props => {
 
   const character = props.character;
 
-  const maxDex = () => {
-    const dex = abilityBonusCalc(character.dex)
-    const maxDex = character.ACmax
-    if (maxDex !== 0 && dex >= maxDex) return maxDex;
-    else return dex;
-  }
-
   return (
-    <div className='flex flex-col justufy-center w-3/4 border border-black text-2xl'>
-      <div className='flex justify-around items-center'>
+    <div className='flex flex-col justufy-center m-2 p-2 border border-black text-2xl space-y-2'>
+      <div className='flex justify-around items-center space-x-4'>
         <h1>{character.name}</h1>
         {character.subrace === "" ?
           <p>{formatString(character.race)}</p>
@@ -23,12 +16,12 @@ const CharacterCard = props => {
         }
         <p>{formatString(character.class)} {character.level}</p>
       </div>
-      <div className='flex justify-center'>
-        <p>HP: {character.currentHP}</p>
+      <div className='flex justify-center space-x-4'>
+        <p>HP: {parseInt(character.currentHP)}</p>
         <p>/ {character.maxHP}</p>
       </div>
-      <div className='flex justify-around'>
-        <p>AC: {character.ACarmor + maxDex() + character.ACshield + character.ACmiscBonus}</p>
+      <div className='flex justify-around space-x-4'>
+        <p>AC: {character.armor + character.shield + calcDex(abilityBonusCalc(character.dex), character.maximumDexterity) + character.acMiscBonus}</p>
         <p>Initiative: {abilityBonusCalc(character.dex)}</p>
         <p>Perception: {
           character.skills.perception.trained === true ?

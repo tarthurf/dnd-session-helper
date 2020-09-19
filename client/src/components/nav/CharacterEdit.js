@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { abilityBonusCalc, formatString, calcDex } from '../../utils/helpers';
 import useForm from '../../utils/useForm';
 import { SubraceSwitch } from '../../utils/switchHelpers';
@@ -19,6 +19,7 @@ const CharacterEdit = props => {
   const updateChar = () => {
     stringIntConvert(values)
     setTimeout(() => API.updateCharacterById(values._id, values), 1000)
+    // setTimeout(() => console.log(values), 1000)
   }
 
   const { values, handleChange, handleSubmit } = useForm(userCharacter, updateChar)
@@ -252,12 +253,12 @@ const CharacterEdit = props => {
             <p>Saving Throws</p>
             {Object.entries(values.saves).map((save, i) => (
               save[1] === false ? (
-                <div className='flex items-center space-x-2' key={i + 200}>
+                <div className='flex items-center space-x-2' key={i + 300}>
                   <input
-                    key={i}
-                    name="saves"
+                    key={i + 400}
+                    name={`${save[0]}Save`}
                     type="checkbox"
-                    onChange={() => save[1] = !save[1]}
+                    onClick={() => save[1] = !save[1]}
                     value={save[1]}
                     defaultChecked={false}
                   />
@@ -267,13 +268,13 @@ const CharacterEdit = props => {
                       :
                       null
                   ))}</p>
-                  <label key={i + 100}>{`${formatString(save[0])}`}</label>
+                  <label key={i + 500}>{`${formatString(save[0])}`}</label>
                 </div>
               ) : (
-                  <div className='flex items-center space-x-2' key={i + 200}>
+                  <div className='flex items-center space-x-2' key={i + 300}>
                     <input
-                      key={i}
-                      name="saves"
+                      key={i + 400}
+                      name={`${save[0]}Save`}
                       type="checkbox"
                       onChange={() => save[1] = !save[1]}
                       value={save[1]}
@@ -285,13 +286,13 @@ const CharacterEdit = props => {
                         :
                         null
                     ))}</p>
-                    <label key={i + 100}>{`${formatString(save[0])}`}</label>
+                    <label key={i + 500}>{`${formatString(save[0])}`}</label>
                   </div>
                 )
             ))}
           </div>
           <div className='flex flex-col text-sm'>
-            <p>Skill Proficiencies:</p>
+            <p>Skill Proficiencies</p>
             {Object.entries(values.skills).map((skill, i) => (
               skill[1].trained === false ? (
                 <div className='flex items-center space-x-2' key={i + 200}>
@@ -390,7 +391,7 @@ const CharacterEdit = props => {
                 type="number"
                 onChange={handleChange}
                 value={values.maximumDexterity}
-                min={0}
+                min={-1}
                 max={99}
                 required
               />
