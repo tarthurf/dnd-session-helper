@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
-import UserContext from '../utils/UserContext';
-import { abilityBonusCalc, formatString, calcDex } from '../utils/helpers';
+import UserContext from '../../utils/UserContext';
+import { abilityBonusCalc, formatString, calcDex } from '../../utils/helpers';
 
 const UserCard = props => {
 
@@ -54,7 +54,6 @@ const UserCard = props => {
         <button className='border border-black ml-2 px-1'
           onClick={() => {
           socket.emit('update-hp', {hpState, name});
-          API.updateCharacterById(userCharacter._id, {currentHP: hpState});
           }}>
           Set HP 
         </button>
