@@ -269,6 +269,7 @@ const SimpleBuild = props => {
         max={99}
       ></input>
 
+<<<<<<< HEAD
       <label>Do you have any miscellaneous bonuses to your armor class?</label>
       <input
         name="acMiscBonus"
@@ -279,6 +280,8 @@ const SimpleBuild = props => {
         max={99}
       ></input>
 
+=======
+>>>>>>> bd3ae09c0b5021521f5b05ac302ca24b607f19eb
       <button className='border border-black m-2'
         type="submit"
       >

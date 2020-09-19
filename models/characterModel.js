@@ -40,6 +40,7 @@ const CharacterSchema = new Schema({
     type: Number,
     default: 0,
   },
+<<<<<<< HEAD
   tempHP: {
     type: Number,
     default: 0,
@@ -59,11 +60,17 @@ const CharacterSchema = new Schema({
   acMiscBonus: {
     type: Number,
     default: 0
+=======
+  ACarmor: {
+    type: Number,
+    default: 10,
+>>>>>>> bd3ae09c0b5021521f5b05ac302ca24b607f19eb
   },
-  proficiencyBonus: {
+  ACshield: {
     type: Number,
     default: 0
   },
+<<<<<<< HEAD
   initiative: {
     type: Number,
     default: 0,
@@ -71,6 +78,19 @@ const CharacterSchema = new Schema({
   perception: {
     type: Number,
     default: 0,
+=======
+  ACmax: {
+    type: Number,
+    default: 0
+  },
+  ACmiscBonus: {
+    type: Number,
+    default: 0
+  },
+  proficiencyBonus: {
+    type: Number,
+    default: 0
+>>>>>>> bd3ae09c0b5021521f5b05ac302ca24b607f19eb
   },
   background: {
     type: String,

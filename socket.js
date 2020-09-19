@@ -1,5 +1,4 @@
 const io = require('./server.js');
-const { disconnect } = require('mongoose');
 
 let userCharacters= []
 

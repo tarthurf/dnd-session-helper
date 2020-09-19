@@ -1,36 +1,10 @@
-import React, { useState } from 'react';
-import useForm from '../utils/useForm';
-import API from '../utils/API';
+import React from 'react';
 import SimpleBuild from './characterForms/SimpleBuild';
-import ComplexBuild from './characterForms/complex_build/ComplexBuild';
 
 const CreateCharacter = props => {
 
   let state = props.state;
   const setState = props.setState;
-
-  const characterSubmit = () => {
-    console.log(values)
-    values.currentHP = values.maxHP;
-    API.createCharacter(values)
-    setState(!state)
-  }
-
-  const { values, handleSubmit, handleChange } = useForm(
-    {
-      name: "",
-      race: "",
-      subrace: "",
-      class: "",
-      level: "",
-      maxHP: "",
-      currentHP: "",
-      AC: "",
-      initiative: "",
-      perception: "",
-    },
-    characterSubmit
-  )
 
   return(
     <React.Fragment>
