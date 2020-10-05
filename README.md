@@ -22,7 +22,7 @@ There are many updates planned for this application:
 * Add item tracking
 * Add spell tracking and automatic DC calculations
 * Allow players to search for items, spells, etc... and add directly to correct list
-* Add ability to maake and manage rooms so anyone can use this application
+* Add ability to make and manage rooms so anyone can use this application
 
 ### JSYK
 
