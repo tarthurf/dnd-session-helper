@@ -1,29 +1,29 @@
-# Create React Express App
+# Chatticus
+![Overview](dnd-session-helper.png)
 
-## About This Boilerplate
+## Who made this project?
 
-This setup allows for a Node/Express/React app which can be easily deployed to Heroku.
+I did!
 
-The front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon.
+## What is this project for?
+This project was created to for Dungeons & Dragons 5th Edition players and game masters to track character sheets and have visible, live player stats that everyone can see.
 
-## Starting the app locally
+## Why did I make this project?
 
-Start by installing front and backend dependencies. While in this directory, run the following command:
+This is a personal project I plan on using with friends. It is a work in progress and there is much more that needs to be done before I call this project finished.
 
-```
-npm install
-```
+### Future Updates
 
-This should install node modules within the server and the client folder.
+There are many updates planned for this application:
+* Improve stability
+* Fix known rendering issues
+* Create more robust character building
+* Implement search bar using dnd5e api
+* Add item tracking
+* Add spell tracking and automatic DC calculations
+* Allow players to search for items, spells, etc... and add directly to correct list
+* Add ability to maake and manage rooms so anyone can use this application
 
-After both installations complete, run the following command in your terminal:
+### JSYK
 
-```
-npm start
-```
-
-Your app should now be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
-
-## Deployment (Heroku)
-
-To deploy, simply add and commit your changes, and push to Heroku. As is, the NPM scripts should take care of the rest.
+This project is open source. Anyone may contribute to this project. You may clone or fork this repository for your own personal use but you may NOT claim this as your own work or post the active site without my permission.
