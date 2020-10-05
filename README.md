@@ -1,4 +1,4 @@
-# Chatticus
+# Dungeons & Dragons Session Helper
 ![Overview](dnd-session-helper.png)
 
 ## Who made this project?
