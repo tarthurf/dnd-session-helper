@@ -1,5 +1,6 @@
 const io = require('./server.js');
 
+// Holds all active player's characters
 let userCharacters= []
 
 // Connecting Socket

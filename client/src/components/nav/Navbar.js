@@ -1,6 +1,9 @@
 import React, { useState, useContext } from 'react';
 import UserContext from '../../utils/UserContext';
 
+// this is currently a dummy component. It only renders the black bar at the top of the page.
+// searchbar and other basic functions will go here
+
 const Navbar = props => {
 
   return (

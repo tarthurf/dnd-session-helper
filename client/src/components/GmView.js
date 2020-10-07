@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import CharacterCard from './characterViews/CharacterCard';
 
+// TODO: gm view does not currently function
+// this will allow the gm to view all character sheets and have other tools available to them as well
+
 const GmView = props => {
 
   const socket = props.socket;

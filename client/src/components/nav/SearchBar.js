@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import useForm from '../../utils/useForm';
 import axios from 'axios';
 
+// this searchbar component is not in use.
+// TODO: make switch statement to render the proper view for searched items
+
 const SearchBar = props => {
 
   const [ searchItem, setSearchItem ] = useState()

@@ -4,8 +4,10 @@ import SimpleBuild from './characterForms/SimpleBuild';
 const CreateCharacter = props => {
 
   let state = props.state;
+
   const setState = props.setState;
 
+  // renders the character creation view on state change
   return(
     <React.Fragment>
       <SimpleBuild state={state} setState={setState} />

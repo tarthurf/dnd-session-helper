@@ -5,6 +5,7 @@ import API from '../utils/API';
 
 const CharacterSelect = props => {
 
+  // sets the list of selectable characters from the character database
   const characters = props.characters
 
   const [userCharacter, setUserCharacter] = useContext(UserContext);
@@ -13,12 +14,18 @@ const CharacterSelect = props => {
     API.getCharacterByName(values.name)
       .then(data => {
         const character = data.data[0];
+
+        // TODO: This may have been incorrectly coded
         setUserCharacter = character;
+        // TODO: This may have been incorrectly coded
+
         console.log("characer picked", userCharacter)
       })
       .catch(err => console.log(err))
   }
 
+  // this handles form controls for selecting your character
+  // the selectCharacter function will be run when the user submits this form
   const { values, handleChange, handleSubmit } = useForm(
     { name: '' },
     selectCharacter

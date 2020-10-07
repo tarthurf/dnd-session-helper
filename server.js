@@ -6,11 +6,23 @@ const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3001;
 
 const app = express();
+
+// Sets the server up for socket.io
 const server = require('http').Server(app);
+
+// Define IO
 const io = require('socket.io') (server);
+
+// Exporting io to use in socket.js
 module.exports = io;
-const routes = require('./routes/index.js')
+
+// Defining routes
+const routes = require('./routes/index.js');
+
+// Connects the application to cloud database
 require('./database');
+
+// Brings in all the event listeners and handlers from socket.js
 require('./socket');
 
 // Middleware

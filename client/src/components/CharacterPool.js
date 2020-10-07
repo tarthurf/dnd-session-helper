@@ -5,12 +5,16 @@ import UserCard from './characterViews/UserCard';
 
 const CharacterPool = props => {
 
+  // importing socket from App.js
   const socket = props.socket;
 
+  // Sets the user character based on the context provider
   const { userCharacter } = useContext(UserContext);
 
+  // this renders the view of all player's base information and stats
+  // Holds all active player's characters
   const [activeCharacters, setActiveCharacters] = useState([]);
-
+  
   useEffect(() => {
     socket.on('update-user-characters', data => {
       // Updates player array from backend array

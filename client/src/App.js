@@ -11,6 +11,7 @@ const socket = io();
 
 const App = () => {
 
+  // This state controls the character creation view
   const [createCharacterState, setCreateCharacterState] = useState(false)
 
   // Sets character Array for users to select from
@@ -34,6 +35,7 @@ const App = () => {
       .catch(err => console.log(err))
   }
 
+  // Essentially an admin login for gms
   const gmLogin = () => {
     setUserCharacter({ name: 'gm' })
   }
@@ -65,6 +67,8 @@ const App = () => {
       })
   }, [])
 
+  // sends any player characters to be stored in the back end,
+  // this helps load the current player view on the right side of the app
   useEffect(() => {
     socket.on('update-current-character', data => {
       setUserCharacter(data);
@@ -72,6 +76,7 @@ const App = () => {
   }, [socket])
 
   return (
+    // stores the users character through the context api
     <UserContext.Provider value={{ userCharacter }}>
       <Navbar socket={socket} />
       <div className='flex justify-around'>

@@ -5,28 +5,44 @@ import { SubraceSwitch } from '../../utils/switchHelpers';
 import API from '../../utils/API';
 import UserContext from '../../utils/UserContext';
 
+// This is the most complicated component of the application
+// This component renders the character sheet on the left side of application after player has selected a character
+
+
 const CharacterEdit = props => {
 
   const socket = props.socket;
 
   const { userCharacter } = useContext(UserContext);
 
+  // this function checks if any items in an array could be an integer
+  // If any items could be converted from string to integer it does so
   const stringIntConvert = obj => {
+
+    // this line converts a .json object of key/value pairs and turns each pair into an array
+    // each key/value array is then stored in a single array
+    // we then map through each array to check and see if any values can be an integer
     Object.entries(obj).map(item => {
+
+      // if a value can be an integer we parse the string into and integer and reassign the value as such
       if ((item[1] >>> 0 === parseFloat(item)) === true) item = parseInt(item[1]);
       console.log(`Values: ${item[0]}: ${item[1]} is a ${typeof item[1]}`)
     })
   }
 
+  // timeouts were used here in place of async functions
+  // saves any changed values on the players character sheet to the database and updates their character sheet
+  // TODO: update to async function
   const updateChar = () => {
     stringIntConvert(values)
     setTimeout(() => socket.emit('update-character', values), 1000)
     setTimeout(() => API.updateCharacterById(values._id, values), 1000)
-
   }
 
+  // this handles changes of all values in the character sheet
   const { values, handleChange, handleSubmit } = useForm(userCharacter, updateChar)
 
+  // this object stores ability bonuses based on abilities scores for the active character
   const abilityBonus = {
     str: abilityBonusCalc(values.str),
     dex: abilityBonusCalc(values.dex),

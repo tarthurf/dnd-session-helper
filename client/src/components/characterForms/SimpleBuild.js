@@ -8,11 +8,13 @@ const SimpleBuild = props => {
   let state = props.state;
   const setState = props.setState;
 
+  // posts the new character to the database and terminates the character build view
   const characterSubmit = () => {
     API.createCharacter(values)
     setState(!state)
   }
 
+  // this handles the form changes and executes characterSubmit function on submit
   const { values, handleSubmit, handleChange } = useForm(
     {
       name: "",

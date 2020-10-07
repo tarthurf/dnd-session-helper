@@ -3,6 +3,7 @@ import { abilityBonusCalc, formatString, calcDex } from '../../utils/helpers';
 
 const CharacterCard = props => {
 
+  // holds player's current character
   const character = props.character;
 
   return (
