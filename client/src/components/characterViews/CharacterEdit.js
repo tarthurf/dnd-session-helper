@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { abilityBonusCalc, formatString, calcDex } from '../../utils/helpers';
+import { abilityBonusCalc, formatString, calcDex } from '../../utils/helperFunctions';
 import useForm from '../../utils/useForm';
 import { SubraceSwitch } from '../../utils/switchHelpers';
 import API from '../../utils/API';

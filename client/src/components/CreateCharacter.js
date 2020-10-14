@@ -8,15 +8,15 @@ const CreateCharacter = props => {
   const setState = props.setState;
 
   // renders the character creation view on state change
-  return(
-    <React.Fragment>
+  return (
+    <div>
       <SimpleBuild state={state} setState={setState} />
-    <button className='border border-black m-2'
-      onClick={()=> setState(!state)}
-    >
-      Choose a Character
-    </button>
-    </React.Fragment>
+      <button className='border border-black m-2'
+        onClick={() => setState(!state)}
+      >
+        Choose a Character
+      </button>
+    </div>
   )
 }
 

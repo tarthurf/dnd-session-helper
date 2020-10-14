@@ -1,7 +1,11 @@
 import React from 'react';
 import useForm from '../../utils/useForm';
+import NumberInputSelection from './buildSections/NumberInputSelections';
 import API from '../../utils/API';
-const { SubraceSwitch } = require('../../utils/switchHelpers.js')
+import MultiInputSelections from './buildSections/MultiInputSelections';
+import { formatString } from '../../utils/helperFunctions';
+import { races } from '../../utils/helperLists';
+import { SubraceSwitch } from '../../utils/switchHelpers';
 
 const SimpleBuild = props => {
 
@@ -15,6 +19,7 @@ const SimpleBuild = props => {
   }
 
   // this handles the form changes and executes characterSubmit function on submit
+  // race, class and background are set as the first option of drop down menu's to ensure a selection was made
   const { values, handleSubmit, handleChange } = useForm(
     {
       name: "",
@@ -44,9 +49,7 @@ const SimpleBuild = props => {
     <form className='flex flex-col items-center gap-y-2'
       onSubmit={handleSubmit}
     >
-      <label>
-        What is your character's name?
-      </label>
+      <label>Character Name:</label>
       <input
         name="name"
         type="text"
@@ -56,234 +59,40 @@ const SimpleBuild = props => {
         required
       />
 
-      <label>
-        What is your character's race?
-      </label>
+      <label>Race:</label>
       <select
         name="race"
         onChange={handleChange}
         value={values.race}
-        required
       >
-        <option value="dragonborn">Dragonborn</option>
-        <option value="dwarf">Dwarf</option>
-        <option value="elf">Elf</option>
-        <option value="gnome">Gnome</option>
-        <option value="half-elf">Half-Elf</option>
-        <option value="halfling">Halfling</option>
-        <option value="half-orc">Half-Orc</option>
-        <option value="human">Human</option>
-        <option value="tiefling">Tiefling</option>
+        {races.map((race, i) => (
+          <option key={i + 20} value={race}>{formatString(race)}</option>
+        ))}
       </select>
 
-      <label>
-        If applicable, What is your character's subrace?
-      </label>
+      <label>Subrace:</label>
       <select
         name="subrace"
         onChange={handleChange}
         value={values.subrace}
       >
         {SubraceSwitch(values.race).map((subrace, i) => (
-          <option key={i} value={subrace}>{subrace.charAt(0).toUpperCase() + subrace.slice(1)}</option>
+          <option key={i + 40} value={subrace}>{formatString(subrace)}</option>
         ))}
-
       </select>
 
-      <label>
-        What is your character's class?
-      </label>
-      <select
-        name="class"
-        onChange={handleChange}
-        value={values.class}
-        required
-      >
-        <option value="barbarian">Barbarian</option>
-        <option value="bard">Bard</option>
-        <option value="cleric">Cleric</option>
-        <option value="druid">Druid</option>
-        <option value="fighter">Fighter</option>
-        <option value="monk">Monk</option>
-        <option value="paladin">Paladin</option>
-        <option value="ranger">Ranger</option>
-        <option value="rogue">Rogue</option>
-        <option value="sorcerer">Sorcerer</option>
-        <option value="warlock">Warlock</option>
-        <option value="wizard">Wizard</option>
-      </select>
-
-      <label>
-        What is your character's level?
-      </label>
-      <input
-        name="level"
-        type="number"
-        onChange={handleChange}
-        value={values.level}
-        min={1}
-        max={20}
-        required
+      <MultiInputSelections
+        handleChange={handleChange}
+        values={values}
       />
 
-      <label>
-        What is your character's background?
-      </label>
-      <select
-        name="background"
-        onChange={handleChange}
-        value={values.background}
-        required
-      >
-        <option value="acolyte">Acolyte</option>
-        <option value="charlatan">Charlatan</option>
-        <option value="criminal">Criminal</option>
-        <option value="entertainer">Entertainer</option>
-        <option value="folkHero">Folk Hero</option>
-        <option value="guildArtisan">Guild Artisan</option>
-        <option value="guildMerchant">Guild Merchant</option>
-        <option value="hermit">Hermit</option>
-        <option value="knight">Knight</option>
-        <option value="noble">Noble</option>
-        <option value="outlander">Outlander</option>
-        <option value="pirate">Pirate</option>
-        <option value="sage">Sage</option>
-        <option value="sailor">Sailor</option>
-        <option value="soldier">Soldier</option>
-        <option value="spy">Spy</option>
-        <option value="urchin">Urchin</option>
-      </select>
-
-      <label>
-        What is your character's max HP?
-      </label>
-      <input
-        name="maxHP"
-        type="number"
-        onChange={handleChange}
-        value={values.maxHP}
-        min={1}
-        max={99}
-        required
+      <NumberInputSelection
+        handleChange={handleChange}
+        values={values}
       />
 
-      <label>
-        Set your ability Scores (include racial adjustments)
-      </label>
-      <p>Strength</p>
-      <input
-        name="str"
-        type="number"
-        onChange={handleChange}
-        value={values.str}
-        min={1}
-        max={20}
-        required
-      ></input>
-      <p>Dexterity</p>
-      <input
-        name="dex"
-        type="number"
-        onChange={handleChange}
-        value={values.dex}
-        min={1}
-        max={20}
-        required
-      ></input>
-      <p>Constitution</p>
-      <input
-        name="con"
-        type="number"
-        onChange={handleChange}
-        value={values.con}
-        min={1}
-        max={20}
-        required
-      ></input>
-      <p>Intelligence</p>
-      <input
-        name="int"
-        type="number"
-        onChange={handleChange}
-        value={values.int}
-        min={1}
-        max={20}
-        required
-      ></input>
-      <p>Wisdom</p>
-      <input
-        name="wis"
-        type="number"
-        onChange={handleChange}
-        value={values.wis}
-        min={1}
-        max={20}
-        required
-      ></input>
-      <p>Charisma</p>
-      <input
-        name="cha"
-        type="number"
-        onChange={handleChange}
-        value={values.cha}
-        min={1}
-        max={20}
-        required
-      ></input>
 
-      <label>What is your proficiency bonus?</label>
-      <input
-        name="proficiencyBonus"
-        type="number"
-        onChange={handleChange}
-        value={values.proficiencyBonus}
-        min={0}
-        max={99}
-      ></input>
-
-      <label>What is your armor bonus (No armor = 10)</label>
-      <input
-        name="armor"
-        type="number"
-        onChange={handleChange}
-        value={values.armor}
-        min={10}
-        max={99}
-      ></input>
-
-      <label>What is your shield bonus</label>
-      <input
-        name="shield"
-        type="number"
-        onChange={handleChange}
-        value={values.shield}
-        min={0}
-        max={99}
-      ></input>
-
-      <label>What is your max dexterity for your armor (0 if no maximum dexterity)?</label>
-      <input
-        name="maximumDexterity"
-        type="number"
-        onChange={handleChange}
-        value={values.maximumDexterity}
-        min={0}
-        max={99}
-      ></input>
-
-      <label>Do you have any miscellaneous bonuses to your armor class?</label>
-      <input
-        name="acMiscBonus"
-        type="number"
-        onChange={handleChange}
-        value={values.acMiscBonus}
-        min={0}
-        max={99}
-      ></input>
-
-      <button className='border border-black m-2'
-        type="submit"
-      >
+      <button className='border border-black m-2' type="submit">
         Create character
       </button>
     </form>
