@@ -1,8 +1,8 @@
 import React from 'react';
 import useForm from '../../utils/useForm';
-import NumberInputSelection from './buildSections/NumberInputSelections';
+import NumberInputSelection from './characterBuildSections/NumberInputSelections';
 import API from '../../utils/API';
-import MultiInputSelections from './buildSections/MultiInputSelections';
+import MultiInputSelections from './characterBuildSections/MultiInputSelections';
 import { formatString } from '../../utils/helperFunctions';
 import { races } from '../../utils/helperLists';
 import { SubraceSwitch } from '../../utils/switchHelpers';
