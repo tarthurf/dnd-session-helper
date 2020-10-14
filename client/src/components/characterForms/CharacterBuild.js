@@ -7,7 +7,7 @@ import { formatString } from '../../utils/helperFunctions';
 import { races } from '../../utils/helperLists';
 import { SubraceSwitch } from '../../utils/switchHelpers';
 
-const SimpleBuild = props => {
+const CharacterBuild = props => {
 
   let state = props.state;
   const setState = props.setState;
@@ -91,7 +91,6 @@ const SimpleBuild = props => {
         values={values}
       />
 
-
       <button className='border border-black m-2' type="submit">
         Create character
       </button>
@@ -99,4 +98,4 @@ const SimpleBuild = props => {
   )
 }
 
-export default SimpleBuild;
+export default CharacterBuild;
