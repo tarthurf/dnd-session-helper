@@ -14,6 +14,7 @@ const FormNumberInput = props => {
         max={props.max}
         required
       />
+      {props.children}
     </React.Fragment>
   )
 }
