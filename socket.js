@@ -6,6 +6,7 @@ let userCharacters= []
 // Connecting Socket
 io.on('connection', socket => {
   console.log('session connected');
+  io.emit('update-user-characters', userCharacters);
 
   // Handles user character selection
   socket.on('add-user-character', data => {
