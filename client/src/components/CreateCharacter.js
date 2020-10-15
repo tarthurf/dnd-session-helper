@@ -1,5 +1,5 @@
 import React from 'react';
-import SimpleBuild from './characterForms/SimpleBuild';
+import CharcterBuild from './characterForms/CharacterBuild';
 
 const CreateCharacter = props => {
 
@@ -8,15 +8,15 @@ const CreateCharacter = props => {
   const setState = props.setState;
 
   // renders the character creation view on state change
-  return(
-    <React.Fragment>
-      <SimpleBuild state={state} setState={setState} />
-    <button className='border border-black m-2'
-      onClick={()=> setState(!state)}
-    >
-      Choose a Character
-    </button>
-    </React.Fragment>
+  return (
+    <div>
+      <CharcterBuild state={state} setState={setState} />
+      <button className='border border-black m-2'
+        onClick={() => setState(!state)}
+      >
+        Choose a Character
+      </button>
+    </div>
   )
 }
 

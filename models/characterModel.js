@@ -100,29 +100,65 @@ const CharacterSchema = new Schema({
   languages: [
   ],
   saves: {
-    str: {
-      type: Boolean,
-      default: false,
+    strength: {
+      ability: {
+        type: String,
+        default: "str",
+      },
+      trained: {
+        type: Boolean,
+        default: false,
+      },
     },
-    dex: {
-      type: Boolean,
-      default: false,
+    dexterity: {
+      ability: {
+        type: String,
+        default: "dex",
+      },
+      trained: {
+        type: Boolean,
+        default: false,
+      },
     },
-    con: {
-      type: Boolean,
-      default: false,
+    constitution: {
+      ability: {
+        type: String,
+        default: "con",
+      },
+      trained: {
+        type: Boolean,
+        default: false,
+      },
     },
-    int: {
-      type: Boolean,
-      default: false,
+    intelligence: {
+      ability: {
+        type: String,
+        default: "int",
+      },
+      trained: {
+        type: Boolean,
+        default: false,
+      },
     },
-    wis: {
-      type: Boolean,
-      default: false,
+    wisdom: {
+      ability: {
+        type: String,
+        default: "wis",
+      },
+      trained: {
+        type: Boolean,
+        default: false,
+      },
     },
-    cha: {
-      type: Boolean,
-      default: false,
+    charisma: {
+      ability: {
+        type: String,
+        default: "cha",
+      },
+      trained: {
+        type: Boolean,
+        default: false,
+      },
     },
   },
   skills: {

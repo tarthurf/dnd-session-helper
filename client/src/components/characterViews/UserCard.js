@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import UserContext from '../../utils/UserContext';
-import { abilityBonusCalc, formatString, calcDex } from '../../utils/helpers';
+import { abilityBonusCalc, formatString, calcDex } from '../../utils/helperFunctions';
 import API from '../../utils/API';
 
 const UserCard = props => {

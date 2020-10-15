@@ -1,5 +1,5 @@
 import React from 'react';
-import { abilityBonusCalc, formatString, calcDex } from '../../utils/helpers';
+import { abilityBonusCalc, formatString, calcDex } from '../../utils/helperFunctions';
 
 const CharacterCard = props => {
 

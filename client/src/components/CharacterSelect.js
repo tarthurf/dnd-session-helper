@@ -16,7 +16,7 @@ const CharacterSelect = props => {
         const character = data.data[0];
 
         // TODO: This may have been incorrectly coded
-        setUserCharacter = character;
+        setUserCharacter(character);
         // TODO: This may have been incorrectly coded
 
         console.log("characer picked", userCharacter)
