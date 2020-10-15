@@ -1,5 +1,5 @@
 import React from 'react';
-import FormNumberInput from '../formInputSegments/FormNumberInput'
+import FormNumberInput from '../form_reusable_Components/FormNumberInput'
 
 const NumberInputSelections = props => {
 

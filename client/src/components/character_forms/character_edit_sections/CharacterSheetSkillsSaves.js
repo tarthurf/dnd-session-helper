@@ -1,6 +1,6 @@
 import React from 'react';
-import FormCheckboxSegment from '../formInputSegments/FormCheckboxSegment';
-import FormNumberInput from '../formInputSegments/FormNumberInput';
+import FormCheckboxSegment from '../form_reusable_Components/FormCheckboxSegment';
+import FormNumberInput from '../form_reusable_Components/FormNumberInput';
 
 const CharacterSheetSkillsSaves = props => {
 

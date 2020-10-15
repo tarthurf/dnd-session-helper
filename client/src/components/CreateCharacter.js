@@ -1,5 +1,5 @@
 import React from 'react';
-import CharcterBuild from './characterForms/CharacterBuild';
+import CharcterBuild from './character_forms/CharacterBuild';
 
 const CreateCharacter = props => {
 

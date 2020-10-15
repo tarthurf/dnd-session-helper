@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import CharacterSheetMain from './characterEditSections/CharacterSheetMain';
-import CharacterSheetAbilities from './characterEditSections/CharacterSheetAbilities';
-import CharacterSheetSkillsSaves from './characterEditSections/CharacterSheetSkillsSaves';
-import CharacterSheetCombatStats from './characterEditSections/CharacterSheetCombatStats';
+import CharacterSheetMain from './character_edit_sections/CharacterSheetMain'
+import CharacterSheetAbilities from './character_edit_sections/CharacterSheetAbilities'
+import CharacterSheetSkillsSaves from './character_edit_sections/CharacterSheetSkillsSaves'
+import CharacterSheetCombatStats from './character_edit_sections/CharacterSheetCombatStats'
 import UserContext from '../../utils/UserContext';
 import useForm from '../../utils/useForm';
 import API from '../../utils/API';

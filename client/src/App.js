@@ -5,7 +5,7 @@ import API from './utils/API';
 import CreateCharacter from "./components/CreateCharacter";
 import CharacterPool from "./components/CharacterPool";
 import Navbar from "./components/nav/Navbar";
-import CharacterEdit from "./components/characterForms/CharacterEdit";
+import CharacterEdit from "./components/character_forms/CharacterEdit";
 
 const socket = io();
 

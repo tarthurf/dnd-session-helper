@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import UserContext from '../utils/UserContext';
-import CharacterCard from './characterViews/CharacterCard';
-import UserCard from './characterViews/UserCard';
+import CharacterCard from './character_views/CharacterCard';
+import UserCard from './character_views/UserCard';
 
 const CharacterPool = props => {
 
@@ -14,7 +14,7 @@ const CharacterPool = props => {
   // this renders the view of all player's base information and stats
   // Holds all active player's characters
   const [activeCharacters, setActiveCharacters] = useState([]);
-  
+
   useEffect(() => {
     socket.on('update-user-characters', data => {
       // Updates player array from backend array
@@ -38,7 +38,6 @@ const CharacterPool = props => {
           :
           <CharacterCard character={char} key={char._id} />
       ))}
-
 
     </div>
   )

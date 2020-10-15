@@ -1,6 +1,6 @@
 import React from 'react';
 import { formatString } from '../../../utils/helperFunctions';
-import FormMultiSelectSegment from '../formInputSegments/FormMultiSelectInput';
+import FormMultiSelectSegment from '../form_reusable_Components/FormMultiSelectInput';
 import { classes, backgrounds } from '../../../utils/helperLists'
 
 const MultiInputSelections = props => {

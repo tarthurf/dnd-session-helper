@@ -14,11 +14,7 @@ const CharacterSelect = props => {
     API.getCharacterByName(values.name)
       .then(data => {
         const character = data.data[0];
-
-        // TODO: This may have been incorrectly coded
         setUserCharacter(character);
-        // TODO: This may have been incorrectly coded
-
         console.log("characer picked", userCharacter)
       })
       .catch(err => console.log(err))

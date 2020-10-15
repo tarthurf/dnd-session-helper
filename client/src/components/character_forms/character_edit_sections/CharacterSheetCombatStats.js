@@ -1,6 +1,6 @@
 import React from 'react';
 import { abilityBonusCalc, calcDex } from '../../../utils/helperFunctions';
-import FormNumberInput from '../formInputSegments/FormNumberInput';
+import FormNumberInput from '../form_reusable_Components/FormNumberInput';
 
 const CharacterSheetCombatStats = props => {
 
